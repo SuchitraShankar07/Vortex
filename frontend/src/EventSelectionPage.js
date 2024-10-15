@@ -1,13 +1,12 @@
-// EventSelectionPage.js
 import React, { useState } from 'react';
 
 function EventSelectionPage() {
   const [events] = useState([
-    { id: 1, name: 'Music Festival' },
-    { id: 2, name: 'Tech Conference' },
-    { id: 3, name: 'Art Exhibition' },
-    { id: 4, name: 'Food Carnival' },
-    { id: 5, name: 'Marathon' },
+    { id: 1, name: 'Music Festival', description: 'An exciting day of live music performances!' },
+    { id: 2, name: 'Tech Conference', description: 'A gathering of tech enthusiasts and professionals.' },
+    { id: 3, name: 'Art Exhibition', description: 'An exhibition of modern and contemporary art.' },
+    { id: 4, name: 'Food Carnival', description: 'A celebration of food with diverse culinary options.' },
+    { id: 5, name: 'Marathon', description: 'A marathon race for fitness enthusiasts.' },
   ]);
 
   return (
@@ -18,15 +17,28 @@ function EventSelectionPage() {
       </header>
 
       {/* Event Selection Section */}
-      <div style={{ backgroundColor: '#1c1c1c', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: '0 auto' }}>
-        <h2>Select an Event</h2>
-        <ul style={{ listStyleType: 'none', padding: '0' }}>
+      <div style={{ backgroundColor: '#1c1c1c', padding: '20px', borderRadius: '10px', maxWidth: '800px', margin: '0 auto' }}>
+        <h2 style={{ textAlign: 'center' }}>Available Events</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
           {events.map(event => (
-            <li key={event.id} style={{ padding: '10px 0', borderBottom: '1px solid #444' }}>
-              <a href="#" style={{ color: '#00aced', textDecoration: 'none' }}>{event.name}</a>
-            </li>
+            <div 
+              key={event.id} 
+              style={{
+                backgroundColor: '#333',
+                padding: '20px',
+                borderRadius: '15px',
+                width: '250px',
+                textAlign: 'center',
+                transition: 'transform 0.3s ease',
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              <h3 style={{ color: '#00aced' }}>{event.name}</h3>
+              <p>{event.description}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
 
       {/* Footer Section */}

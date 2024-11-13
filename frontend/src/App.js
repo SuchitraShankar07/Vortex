@@ -1,26 +1,22 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
-import Footer from "./components/Footer/Footer";
-import Home from './components/Home/Home';
-import ContactPage from './components/ContactPage/ContactPage';
-import Register from './components/Login/Register';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import EventSelectionPage from './EventSelectionPage';
+import EventPage from './EventPage';
+import EventRegistration from './EventRegistration';
 
 function App() {
   return (
-    <div className="App">
-      <HashRouter>
-        <Navbar />
+    <Router>
+      <div>
         <Routes>
-          {/* General paths */}
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<EventSelectionPage />} />
+          <Route path="/event" element={<EventPage />} />
+          <Route path="/register" element={<EventRegistration />} />
         </Routes>
-        <Footer />
-      </HashRouter>
-    </div>
+      </div>
+    </Router>
   );
 }
 
 export default App;
+

@@ -1,4 +1,3 @@
-// EventRegistration.js
 import React, { useState } from "react";
 
 function EventRegistration() {
@@ -57,3 +56,4 @@ function EventRegistration() {
 }
 
 export default EventRegistration;
+

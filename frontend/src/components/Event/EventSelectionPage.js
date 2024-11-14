@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function EventSelectionPage() {
   const [events] = useState([
@@ -21,22 +22,23 @@ function EventSelectionPage() {
         <h2 style={{ textAlign: 'center' }}>Available Events</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
           {events.map(event => (
-            <div 
-              key={event.id} 
-              style={{
-                backgroundColor: '#333',
-                padding: '20px',
-                borderRadius: '15px',
-                width: '250px',
-                textAlign: 'center',
-                transition: 'transform 0.3s ease',
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-            >
-              <h3 style={{ color: '#00aced' }}>{event.name}</h3>
-              <p>{event.description}</p>
-            </div>
+            <Link to="/event" key={event.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div 
+                style={{
+                  backgroundColor: '#333',
+                  padding: '20px',
+                  borderRadius: '15px',
+                  width: '250px',
+                  textAlign: 'center',
+                  transition: 'transform 0.3s ease',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <h3 style={{ color: '#00aced' }}>{event.name}</h3>
+                <p>{event.description}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -56,3 +58,4 @@ function EventSelectionPage() {
 }
 
 export default EventSelectionPage;
+

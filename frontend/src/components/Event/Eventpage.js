@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './EventPage.css';
 
 const EventPage = () => {
@@ -17,10 +18,13 @@ const EventPage = () => {
           <p><strong>Time:</strong> 10:00 AM - 6:00 PM</p>
         </div>
         
-        <button className="register-button">Register Now</button>
+        <Link to="/register">
+          <button className="register-button">Register Now</button>
+        </Link>
       </div>
     </div>
   );
 };
 
 export default EventPage;
+

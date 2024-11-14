@@ -1,0 +1,64 @@
+.home-page {
+    padding: 20px;
+  }
+  
+  .intro h1,
+  .intro h2 {
+    text-align: center;
+  }
+  
+  .image-carousel {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .carousel-image {
+    width: 100%; /* Make the images responsive */
+    max-width: 600px; /* Limit the max width */
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-gap: 20px; /* Space between boxes */
+    margin-top: 40px;
+  }
+  
+  .section-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Initial shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .section-box h2 {
+    font-size: 1.5rem;
+    color: #333333;
+  }
+  
+  .section-box p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .section-box:hover {
+    transform: translateY(-10px); /* Move the box upwards */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  }
+  
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr 1fr; /* 2 columns for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* 1 column for very small screens */
+    }
+  }
+  

@@ -1,0 +1,160 @@
+/* HostEvent.css */
+.host-event {
+    padding: 30px;
+    background-color: #f0f0f0; /* Light grey background for a fresh look */
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    color: #333; /* Dark text for better contrast */
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #2c3e50; /* Darker text for the main heading */
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    color: #34495e; /* Slightly lighter text for the sub-heading */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between form elements */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form-group label {
+    font-weight: 500;
+    color: #3498db; /* Blue color for labels */
+    font-size: 1.1rem;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  }
+  
+  .form-group input[type="file"] {
+    padding: 5px;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: #3498db; /* Focused input border color */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5); /* Subtle glow on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  .submit-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 50px; /* Rounded corners for the button */
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    width: 220px;
+    margin: 0 auto;
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2); /* Shadow on button */
+  }
+  
+  .submit-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+    transform: translateY(-3px); /* Lift effect on hover */
+  }
+  
+  .submit-btn:active {
+    transform: translateY(1px); /* Button slightly pressed on click */
+  }
+  
+  .submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.8); /* Focus glow */
+  }
+  
+  .form-group input:hover,
+  .form-group textarea:hover,
+  .form-group select:hover {
+    border-color: #3498db; /* Highlight borders on hover */
+  }
+  
+  /* Image upload styling */
+  .input-file-container {
+    position: relative;
+  }
+  
+  .input-file-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .input-file-label:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+  }
+  
+  .input-file-label:active {
+    background-color: #1c6187; /* Even darker blue on active */
+  }
+  
+  .input-file {
+    display: none;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .host-event {
+      padding: 20px;
+    }
+  
+    .event-form {
+      padding: 15px;
+    }
+  
+    .submit-btn {
+      width: 100%;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+  

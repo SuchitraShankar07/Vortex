@@ -11,3 +11,8 @@ const clubSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Club", clubSchema);
+/*club head name 
+club name
+club details
+club head email
+club phone no.*/

@@ -10,13 +10,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './clubMain.css';
 
-function App() {
+function clubMain() {
   return (
     <Router>
       <div className="App">
-        <Navbar /> {/* Navbar appears on all pages */}
+        <Navbar /> 
         <Routes>
-          <Route path="/" element={<Home />} /> {/* Default Route */}
+          <Route path="/" element={<Home />} /> 
           <Route path="/home" element={<Home />} />
           <Route path="/host" element={<HostEvent />}/>
           <Route path="/view" element={<ViewEvents />} />
@@ -28,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default clubMain;

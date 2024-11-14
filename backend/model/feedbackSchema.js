@@ -6,6 +6,7 @@ const feedbackSchema = new mongoose.Schema({
     
 
 }, {
+    timestamps: true,
     collection: "feedback"
 })
 

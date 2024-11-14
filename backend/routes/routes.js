@@ -1,7 +1,9 @@
 const express = require("express");
 const userController = require("../controller/userController");
+const clubController = require("../controller/clubController");
 const eventController = require("../controller/eventController");
 const feedbackController = require("../controller/feedbackController");
+const authenticate = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -25,6 +27,11 @@ router.delete("/delete-event/:id", eventController.deleteEventById);
 router.post("/post-feedback", feedbackController.postFeedback);
 
 // club routes
-routes
+router.post("/register", clubController.registerClub);
+router.post("/login", clubController.loginClub);
+router.post("/create-event", authenticate("club"), clubController.createEvent);
+router.post("/mark-attendance", authenticate("club"), clubController.markAttendance);
+router.get("/display-club", authenticate("club"),clubController.displayClub);
+
 //create, update, delete, displaying club details, 
 module.exports = router;

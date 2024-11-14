@@ -25,7 +25,7 @@ class ContactPage extends Component {
     e.preventDefault();
     const errors = {};
     
-    // Form validation
+
     if (!this.state.name.trim()) {
       errors.name = 'Name is required';
     }
@@ -45,7 +45,7 @@ class ContactPage extends Component {
         message: this.state.message,
       };
 
-      // Using fetch instead of Axios
+  
       fetch("https://eventhub-t514.onrender.com/eventRoute/post-feedback", {
         method: "POST",
         headers: {
@@ -72,7 +72,7 @@ class ContactPage extends Component {
       });
       
     } else {
-      // Set errors
+
       this.setState({
         errors,
       });
@@ -84,7 +84,7 @@ class ContactPage extends Component {
       <div className="contact-container">
         <h1>Contact Us</h1>
         <form onSubmit={this.handleSubmit} className="contact-form">
-          {/* Contact form */}
+      
           <div className="formGroup">
             <label htmlFor="name" className="contact-label">
               Name
@@ -137,7 +137,6 @@ class ContactPage extends Component {
           </button>
         </form>
 
-        {/* Feedback section */}
         <div>
           <h2>User Feedback</h2>
           {this.state.feedback.length === 0 ? (

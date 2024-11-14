@@ -25,7 +25,7 @@ export default function Navbar(props){
         return(
             <nav class="navbar navbar-expand-lg">
                 <div class = "container-fluid box">
-                <img className = "logo" src = {Logo}></img>
+                <img className = "logo" src = {Logo} alt = "well i tried"></img>
                 <div class="menu">
                     <ul>
                     <li><Link to = "/">Home</Link></li>

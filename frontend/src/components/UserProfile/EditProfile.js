@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import RegistrationForm from "../Login/RegistrationForm";
+import RegistrationForm from "../UserLogin/RegistrationForm";
 
 function UserUpdateForm() {
   const [formData, setFormData] = useState({
    
-    usernameValue: '',
+    SRNvalue: '',
     fullNameValue: '',
     emailValue: '',
     phoneValue: '',

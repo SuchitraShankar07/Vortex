@@ -1,4 +1,4 @@
-// controllers/feedbackController.js
+
 const Feedback = require("../model/feedbackSchema");
 
 exports.postFeedback = (req, res) => {

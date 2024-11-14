@@ -1,4 +1,4 @@
-// controllers/eventController.js
+
 const Event = require("../model/eventSchema");
 const mongoose = require("mongoose");
 

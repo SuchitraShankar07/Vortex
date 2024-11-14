@@ -1,18 +1,13 @@
 const mongoose = require("mongoose");
+
 const clubSchema = new mongoose.Schema({
-    "SRN": {type:String, required: true, unique:true, minlength: 13},
-    "fullName": {type:String, required: true, minlength: 3},
-    "email" : {type:String},
-    "phone" : {type:String},
-    "password": {type:String},
-    "bookedEvents": {type:Array},
-    "createdAt": {type:Date},
-    "updatedAt": {type:Date}
-    
-
+    clubName: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },  // hashed password
+    createdEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }]
 }, {
-    collection: "userrecord"
-})
+    timestamps: true,
+    collection: "clubs"
+});
 
-module.exports = mongoose.model("clubSchema", clubSchema);
-    
+module.exports = mongoose.model("Club", clubSchema);

@@ -11,14 +11,14 @@ const eventSchema = new mongoose.Schema({
     "description": {type:String, required: true, minlength: 3},
     "location" : {type:String},
     "date" : {type:Date, required: true},
-    "organizer": {type:String, required: true},
+    "organizer": {type:String, required: true, ref },
     "registeredUsers": [subSchema],
     "createdAt": {type:Date},
     "updatedAt": {type:Date}
     
 
 }, {
-    collection: "userrecord"
+    collection: "events"
 })
 
 module.exports = mongoose.model("eventSchema", eventSchema);

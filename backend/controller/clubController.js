@@ -50,3 +50,14 @@ exports.markAttendance = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+
+exports.displayClub = async (req, res) => {
+    try {
+        const club = await Club.findById(req.params.id);
+        if (!club) return res.status(404).json({ error: "Club not found" });
+        res.json(club);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};

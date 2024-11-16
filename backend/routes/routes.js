@@ -6,32 +6,42 @@ const feedbackController = require("../controller/feedbackController");
 const authenticate = require("../middleware/auth");
 
 const router = express.Router();
+// Authentication
+router.post("/users/register", userController.registerUser);
+router.post("/users/login", userController.loginUser);
 
-// user routes
-router.get("/user-list", userController.getAllUsers);
-router.post("/create-user", userController.createUser);
-router.get("/check-user/:uname", userController.getUserByUsername);
-router.get("/update-user/:id", userController.updateUserById);
-router.put("/update-user/:id", userController.updateUserById);
-router.delete("/delete-user/:id", userController.deleteUserById);
+// Profile Management
+router
+    .route("/users/:id")
+    .get(authenticate, userController.getUserById)
+    .put(authenticate, userController.updateUserById)
+    .delete(authenticate, userController.deleteUserById);
+
+// Event Interaction
+router.get("/users/attended-events", authenticate, userController.attendedEvents);
+router.post("/users/book-event/:eventId", authenticate, userController.bookEvent);
+router.get("/users/generate-qr/:eventId", authenticate, userController.generateQR);
 
 // event routes
-router.get("/event-list", eventController.getAllEvents);
-router.get("/check-event/:id", eventController.getEventById);
-router.post("/create-event", eventController.createEvent);
-router.get("/update-event/:id", eventController.updateEventById);
-router.put("/update-event/:id", eventController.updateEventById);
-router.delete("/delete-event/:id", eventController.deleteEventById);
+router.route("/events")
+    .get(eventController.getAllEvents)
+    .post(authenticate, eventController.createEvent);
 
-// feedback route
-router.post("/post-feedback", feedbackController.postFeedback);
+router.route("/events/:id")
+    .get(eventController.getEventById)
+    .put(authenticate, eventController.updateEventById)
+    .delete(authenticate, eventController.deleteEventById);
+
+//feedbac routes
+router.route("/feedback")
+    .post(feedbackController.postFeedback)
+    // .get(authenticate, feedbackController.getAllFeedback);
 
 // club routes
-router.post("/register", clubController.registerClub);
-router.post("/login", clubController.loginClub);
-router.post("/create-event", clubController.createEvent);
-router.post("/mark-attendance",clubController.markAttendance);
-router.get("/display-club",clubController.displayClub);
+router.post("/club/register", clubController.registerClub);
+router.post("/club/login", clubController.loginClub);
+router.post("/club/:id/create-event", authenticate, clubController.createEvent);
+router.post("/club/:id/mark-attendance", authenticate, clubController.markAttendance);
+router.get("/club/:id", clubController.displayClub);
 
-//create, update, delete, displaying club details, 
 module.exports = router;

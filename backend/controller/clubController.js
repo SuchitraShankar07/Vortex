@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Club = require("../models/Club");
-const Event = require("../models/Event");
-const Attendance = require("../models/Attendance");
+const Club = require("../model/clubSchema");
+const Event = require("../model/eventSchema");
+const Attendance = require("../model/attendanceSchema");
 
 exports.registerClub = async (req, res) => {
     try {
@@ -50,4 +50,3 @@ exports.markAttendance = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-//

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const subSchema = new mongoose.Schema({
     _id:mongoose.Schema.Types.ObjectId,
-    "SRN": {type:String, required: true, minlength:13, ref:"users"},
+    "SRN": {type:String, required: true, minlength:13},
     "fullName": {type:String, required: true},
     "email" : {type:String},
-    "phone" : {type:String}, ref:"users",
+    "phone" : {type:String}, 
 })
 const eventSchema = new mongoose.Schema({
     "eventName": {type:String, required: true, unique:true},
@@ -20,6 +20,7 @@ const eventSchema = new mongoose.Schema({
 }, {
     collection: "events"
 })
+
 
 module.exports = mongoose.model("eventSchema", eventSchema);
 /*const mongoose = require("mongoose");

@@ -1,9 +1,10 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const Event = require("../models/Event");
-const Attendance = require("../models/Attendance");
+const User = require("../model/userSchema");
+const Event = require("../model/eventSchema");
+const Attendance = require("../model/attendanceSchema");
 const QRCode = require("qrcode");
+
 exports.attendedEvents = async( req, res) =>{
     try{
         const user = await User.findById(req.user.id);
@@ -43,6 +44,7 @@ exports.loginUser = async (req, res) => {
     }
 };
 
+
 exports.bookEvent = async (req, res) => {
     try {
         const event = await Event.findById(req.params.eventId);
@@ -57,6 +59,7 @@ exports.bookEvent = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
 
 exports.generateQR = async (req, res) => {
     try {

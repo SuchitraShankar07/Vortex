@@ -29,9 +29,9 @@ router.post("/post-feedback", feedbackController.postFeedback);
 // club routes
 router.post("/register", clubController.registerClub);
 router.post("/login", clubController.loginClub);
-router.post("/create-event", authenticate("club"), clubController.createEvent);
-router.post("/mark-attendance", authenticate("club"), clubController.markAttendance);
-router.get("/display-club", authenticate("club"),clubController.displayClub);
+router.post("/create-event", clubController.createEvent);
+router.post("/mark-attendance",clubController.markAttendance);
+router.get("/display-club",clubController.displayClub);
 
 //create, update, delete, displaying club details, 
 module.exports = router;

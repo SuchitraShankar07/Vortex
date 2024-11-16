@@ -1,36 +1,34 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import './App.css';
-import ClubLogin from './LoginSignup/ClubLogin';
-import ClubRegister from './LoginSignup/ClubRegister';
-import UserLogin from './LoginSignup/UserLogin';
-import UserRegister from './LoginSignup/UserRegister';
-import Footer from './LoginSignup/Footer'; 
-import Navbar from './LoginSignup/Navbar';
-import LoadingScreen from './LoginSignup/LoadingScreen'; 
+import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
+import Footer from './Components/Footer'; 
+import Navbar from './Components/Navbar';
+import LoadingScreen from './Components/LoadingScreen';
+import UserLogin from './Components/UserLogin';
+import ClubLogin from './Components/ClubLogin';
 
 function LoginPage() {
   const [activeSection, setActiveSection] = useState('user');
-  const [isUserRegister, setIsUserRegister] = useState(false);
-  const [isClubRegister, setIsClubRegister] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    
     setTimeout(() => {
       setLoading(false);
     }, 3000);
   }, []);
 
   if (loading) {
-    return <LoadingScreen />; 
+    return <LoadingScreen />;
   }
 
   return (
     <div className="page-container">
       <Navbar />
       <div className="container">
-        {/* user sec*/}
+        {/* User Section */}
         <motion.div
           className="section user"
           onMouseEnter={() => setActiveSection('user')}
@@ -42,21 +40,12 @@ function LoginPage() {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
           <div className="form-card">
-            {isUserRegister ? <UserRegister /> : <UserLogin />}
-          </div>
-          
-          {/* toggling user section */}
-          <div className="toggle-container">
-            <button
-              className="toggle"
-              onClick={() => setIsUserRegister(!isUserRegister)}
-            >
-              {isUserRegister ? 'Go to Login' : 'Go to Register'}
-            </button>
+            <h2>User Login</h2>
+            <UserLogin navigate={navigate} />
           </div>
         </motion.div>
 
-        {/* club section */}
+        {/* Club Section */}
         <motion.div
           className="section club"
           onMouseEnter={() => setActiveSection('club')}
@@ -68,17 +57,8 @@ function LoginPage() {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
           <div className="form-card">
-            {isClubRegister ? <ClubRegister /> : <ClubLogin />}
-          </div>
-
-          {/* toggle for club*/}
-          <div className="toggle-container">
-            <button
-              className="toggle"
-              onClick={() => setIsClubRegister(!isClubRegister)}
-            >
-              {isClubRegister ? 'Go to Login' : 'Go to Register'}
-            </button>
+            <h2>Club Login</h2>
+            <ClubLogin navigate={navigate} />
           </div>
         </motion.div>
       </div>

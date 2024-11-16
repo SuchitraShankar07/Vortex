@@ -1,25 +1,27 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
-import Footer from "./components/Footer/Footer";
-import Home from './components/Home/Home';
-import ContactPage from './components/ContactPage/ContactPage';
-import Register from './components/UserLogin/Register';
-import clubMain from './Club/clubMain'
+import React from 'react';
 import './App.css';
+import LoginPage from './signup_signin/LoginPage'; // Adjust the path as needed
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
+import UserRegister from './signup_signin/Components/UserRegister';
+import ClubRegister from './signup_signin/Components/ClubRegister';
+// import UserDashboard from './signup_signin/Components/UserDashboard';
+import ClubMain from './Club/ClubMain';
+
+const App = () => {
   return (
-    <div>
-    <Router>
-      <div>
+    <div className="App">
+      <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LoginPage />} /> {/* LoginPage will render only on "/" */}
+          <Route path="/user/register" element={<UserRegister />} />
+          <Route path="/club/register" element={<ClubRegister />} />
+          {/* <Route path="/user/dashboard" element={<UserDashboard />} /> */}
+          <Route path="/club/dashboard" element={<ClubMain />} />
         </Routes>
-      </div>
-    </Router>
-</div>
+      </Router>
+    </div>
   );
-}
+};
 
 export default App;
-

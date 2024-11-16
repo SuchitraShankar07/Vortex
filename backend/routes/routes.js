@@ -4,13 +4,12 @@ const clubController = require("../controller/clubController");
 const eventController = require("../controller/eventController");
 const feedbackController = require("../controller/feedbackController");
 const authenticate = require("../middleware/auth");
-
 const router = express.Router();
 // authentication
 router.post("/users/register", userController.registerUser);
 router.post("/users/login", userController.loginUser);
 
-// 
+
 router
     .route("/users/:id")
     .get(authenticate, userController.getUserById)

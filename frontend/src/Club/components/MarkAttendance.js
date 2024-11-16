@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './MarkAttendance.css'; // Import the CSS file
+import './MarkAttendance.css'; 
 
 function MarkAttendance() {
   const [srn, setSrn] = useState('');

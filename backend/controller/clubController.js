@@ -3,16 +3,25 @@ const jwt = require("jsonwebtoken");
 const Club = require("../model/clubSchema");
 const Event = require("../model/eventSchema");
 const Attendance = require("../model/attendanceSchema");
-
 exports.registerClub = async (req, res) => {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const { email, password } = req.body;
+        
+        const existingClub = await Club.findOne({ email });
+        if (existingClub) {
+            return res.status(400).json({ error: "Email already in use" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
         const club = await Club.create({ ...req.body, password: hashedPassword });
+
         res.status(201).json(club);
     } catch (err) {
+        console.error(err);  
         res.status(400).json({ error: err.message });
     }
 };
+
 
 exports.loginClub = async (req, res) => {
     try {

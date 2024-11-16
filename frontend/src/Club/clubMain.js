@@ -9,6 +9,7 @@ import ViewEvents from './components/ViewEvents';
 import ClubProfile from './components/ClubProfile';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import MarkAttendance from './components/MarkAttendance';
 import './clubMain.css';
 
 function clubMain() {
@@ -29,6 +30,7 @@ function clubMain() {
           <Route path="/venue" element={<ReserveVenue />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/profile" element={<ClubProfile />} />
+          <Route path="/attendance" element={<MarkAttendance />} />
         </Routes>
       </div>
     </Router>

@@ -4,18 +4,31 @@ import ScanQR from './ScanQR'; // Assuming ScanQR component is already defined
 
 function AttendancePage() {
   const [referenceNumber, setReferenceNumber] = useState('');
+  const [eventId, setEventId] = useState('');
   const [showQR, setShowQR] = useState(false);
 
   const handleGenerateQR = () => {
-    if (referenceNumber.trim() !== '') {
-      setShowQR(true);
+    if (referenceNumber.trim() === '' || eventId.trim() === '') {
+      alert('Please enter both Reference Number and Event ID.');
     } else {
-      alert('Please enter a reference number.');
+      setShowQR(true);
     }
   };
 
   return (
-    <div className="attendance-page" style={{ backgroundColor: '#121212', color: '#ffffff', minHeight: '100vh', padding: '50px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    <div
+      className="attendance-page"
+      style={{
+        backgroundColor: '#121212',
+        color: '#ffffff',
+        minHeight: '100vh',
+        padding: '50px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <h2 style={{ color: '#ffffff', textAlign: 'center' }}>Student Attendance</h2>
       <div className="qr-section" style={{ textAlign: 'center' }}>
         <input
@@ -24,7 +37,26 @@ function AttendancePage() {
           value={referenceNumber}
           onChange={(e) => {
             setReferenceNumber(e.target.value);
-            setShowQR(false); // Hide QR when reference number changes
+            setShowQR(false); // Hide QR when inputs change
+          }}
+          className="input-field"
+          style={{
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #333',
+            backgroundColor: '#333',
+            color: '#ffffff',
+            marginBottom: '15px',
+            width: '300px',
+          }}
+        />
+        <input
+          type="text"
+          placeholder="Enter Event ID"
+          value={eventId}
+          onChange={(e) => {
+            setEventId(e.target.value);
+            setShowQR(false); // Hide QR when inputs change
           }}
           className="input-field"
           style={{
@@ -48,20 +80,19 @@ function AttendancePage() {
             border: 'none',
             cursor: 'pointer',
             width: '300px',
-            marginBottom: '20px', // Space below button before QR code
+            marginBottom: '20px',
           }}
         >
           Generate QR
         </button>
-        {/* Generate QR should be centered right below the button */}
         {showQR && (
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-            <GenerateQR referenceNumber={referenceNumber} />
+            <GenerateQR referenceNumber={referenceNumber} eventId={eventId} />
           </div>
         )}
       </div>
       <div style={{ marginTop: '30px' }}>
-        <ScanQR /> {/* Assuming ScanQR component is ready to handle the QR scanning */}
+        <ScanQR /> {/* Assuming ScanQR component is ready to handle QR scanning */}
       </div>
     </div>
   );

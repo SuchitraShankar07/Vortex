@@ -21,8 +21,10 @@ const Navbar = () => {  // Make sure this is uppercase
         <Link to="/host">Host Event</Link>
         <Link to="/view">View Events</Link> {/* Link to Host Event page */}
         <Link to="/venue">Reserve Venue</Link>
+        <Link to="/attendance">Attendance</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/profile">Profile</Link>
+        
       </div>
       <button className="nav-toggle" onClick={toggleNavbar}>
         <span className="toggle-icon">{isOpen ? 'X' : '☰'}</span>

@@ -1,0 +1,68 @@
+body {
+  font-family: 'garamond', serif;
+  background-color: #000;
+  color: #00d4aa;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 99vh;
+  width: 96.5%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;  
+  overflow: hidden;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00d4aa;
+  transition: flex 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  flex: 1;  
+  flex-direction: column;
+}
+
+.form-card {
+  background-color: rgba(0, 212, 170, 0.15);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 212, 170, 0.3);
+  color: #00d4aa;
+  margin-bottom: 1rem;
+}
+
+.toggle-container {
+  position: relative;
+  margin-top: 1rem; 
+}
+
+.toggle {
+  background-color: transparent;
+  border: 1px solid #00d4aa;
+  color: #00d4aa;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle:hover {
+  background-color: #00d4aa;
+  color: #000;
+}
+
+footer {
+  margin-top: auto;
+  background-color: #222;
+  color: #00d4aa;
+  text-align: center;
+  padding: 1rem;
+}

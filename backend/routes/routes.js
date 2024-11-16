@@ -6,11 +6,11 @@ const feedbackController = require("../controller/feedbackController");
 const authenticate = require("../middleware/auth");
 
 const router = express.Router();
-// Authentication
+// authentication
 router.post("/users/register", userController.registerUser);
 router.post("/users/login", userController.loginUser);
 
-// Profile Management
+// 
 router
     .route("/users/:id")
     .get(authenticate, userController.getUserById)

@@ -10,8 +10,6 @@ import './App.css';
 function App() {
   return (
     <div>
-      <Navbar />
-      <LoginPage />
     <Router>
       <div>
         <Routes>

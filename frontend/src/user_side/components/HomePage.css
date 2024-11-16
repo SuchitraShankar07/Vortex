@@ -1,0 +1,80 @@
+.homepage {
+  text-align: center;
+  padding: 100px 20px;
+  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(18,18,18,1) 100%);
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 4rem;
+  color: #00bfa6;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.tagline {
+  font-style: italic;
+  color: #57cfc5;
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.description {
+  max-width: 600px;
+  margin: 20px auto;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.button-group {
+  margin-top: 30px;
+}
+
+.btn {
+  background-color: #00bfa6;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #008f74;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.btn {
+  background-color: #00bfa6;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #008f74;
+  transform: scale(45); /* Scale up the button to 115% of its size */
+}
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes textFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

@@ -1,168 +1,136 @@
 import React, { useState } from 'react';
 import './HostEvent.css'; // Assuming you will create styles for the form
+import { useNavigate } from 'react-router-dom';
 
-const HostEvent = () => {
-  const [formData, setFormData] = useState({
-    eventName: '',
-    clubName: '',
-    description: '',
-    time: '',
-    date: '',
-    campus: 'RR', // Default campus value
-    venue: 'Seminar Hall 1', // Default venue
-    image: null, // Default image is null
-  });
+const HostEvent = ({ onAddEvent }) => {
+  const [eventName, setEventName] = useState('');
+  const [clubName, setClubName] = useState('');
+  const [description, setDescription] = useState('');
+  const [dateTime, setDateTime] = useState('');
+  const [campus, setCampus] = useState('RR');
+  const [venue, setVenue] = useState('Seminar Hall 1');
+  const [eventImage, setEventImage] = useState(null);
 
-  // Handle form field changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const navigate = useNavigate();
 
-  // Handle file upload
-  const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      image: e.target.files[0], // Store the selected file
-    });
-  };
-
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here, e.g., save to database or display alert
-    alert('Event submitted successfully!');
+
+    const newEvent = {
+      eventName,
+      clubName,
+      description,
+      dateTime,
+      campus,
+      venue,
+      eventImage: URL.createObjectURL(eventImage),
+    };
+
+    onAddEvent(newEvent);  // Pass the event to parent component
+
+    // Clear form
+    setEventName('');
+    setClubName('');
+    setDescription('');
+    setDateTime('');
+    setCampus('RR');
+    setVenue('Seminar Hall 1');
+    setEventImage(null);
+
+    // Navigate to View Events page
+    navigate('/view-events');
   };
 
   return (
     <div className="host-event">
-      <h1>Host an Event</h1>
-      <form onSubmit={handleSubmit} className="event-form">
-        {/* Event Name */}
-        <div className="form-group">
-          <label htmlFor="eventName">Event Name</label>
-          <input
-            type="text"
-            id="eventName"
-            name="eventName"
-            value={formData.eventName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* Club Name */}
-        <div className="form-group">
-          <label htmlFor="clubName">Club Name</label>
-          <input
-            type="text"
-            id="clubName"
-            name="clubName"
-            value={formData.clubName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* Event Description */}
-        <div className="form-group">
-          <label htmlFor="description">Event Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* Event Date and Time */}
-        <div className="form-group">
-          <label htmlFor="date">Event Date</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="time">Event Time</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* Campus Dropdown */}
-        <div className="form-group">
-          <label htmlFor="campus">Campus</label>
-          <select
-            id="campus"
-            name="campus"
-            value={formData.campus}
-            onChange={handleChange}
-            required
-          >
-            <option value="RR">RR</option>
-            <option value="Ecity">Ecity</option>
-          </select>
-        </div>
-
-        {/* Venue Dropdown or Input */}
-        <div className="form-group">
-          <label htmlFor="venue">Venue</label>
-          <select
-            id="venue"
-            name="venue"
-            value={formData.venue}
-            onChange={handleChange}
-            required
-          >
-            <option value="Seminar Hall 1">Seminar Hall 1</option>
-            <option value="Seminar Hall 2">Seminar Hall 2</option>
-            <option value="Seminar Hall 3">Seminar Hall 3</option>
-            <option value="MRD Auditorium">MRD Auditorium</option>
-            <option value="CIE Room">CIE Room</option>
-            <option value="Other">Other</option>
-          </select>
-          {formData.venue === 'Other' && (
+      <h1>Host Your Event</h1>
+      <form className="event-form" onSubmit={handleSubmit}>
+        {/* Row 1 - Event Name and Club Name */}
+        <div className="form-row">
+          <div className="form-group">
+            <label>Event Name:</label>
             <input
               type="text"
-              name="venue"
-              value={formData.venue}
-              onChange={handleChange}
-              placeholder="Type custom venue"
+              value={eventName}
+              onChange={(e) => setEventName(e.target.value)}
+              required
             />
-          )}
+          </div>
+          <div className="form-group">
+            <label>Club Name:</label>
+            <input
+              type="text"
+              value={clubName}
+              onChange={(e) => setClubName(e.target.value)}
+              required
+            />
+          </div>
         </div>
 
-        {/* Image Upload */}
-        <div className="form-group">
-          <label htmlFor="image">Event Image</label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleFileChange}
-            accept="image/*"
+        {/* Row 2 - Description */}
+        <div className="form-group description">
+          <label>Description:</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>
 
-        {/* Submit Button */}
-        <button type="submit" className="submit-btn">
-          Submit Event
-        </button>
+        {/* Row 3 - Date & Time and Campus */}
+        <div className="form-row-date-time">
+          <div className="form-group">
+            <label>Date & Time:</label>
+            <input
+              type="datetime-local"
+              value={dateTime}
+              onChange={(e) => setDateTime(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Campus:</label>
+            <select
+              value={campus}
+              onChange={(e) => setCampus(e.target.value)}
+              required
+            >
+              <option value="RR">RR Campus</option>
+              <option value="Ecity">Ecity Campus</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Row 4 - Venue and Image Upload */}
+        <div className="form-row-venue-image">
+          <div className="form-group">
+            <label>Venue:</label>
+            <input
+              type="text"
+              value={venue}
+              onChange={(e) => setVenue(e.target.value)}
+              list="venues"
+              required
+            />
+            <datalist id="venues">
+              <option value="Seminar Hall 1" />
+              <option value="Seminar Hall 2" />
+              <option value="Seminar Hall 3" />
+              <option value="MRD Auditorium" />
+              <option value="CIE Room" />
+            </datalist>
+          </div>
+          <div className="form-group">
+            <label>Event Image:</label>
+            <input
+              type="file"
+              onChange={(e) => setEventImage(e.target.files[0])}
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="submit-btn">Submit Event</button>
       </form>
     </div>
   );

@@ -1,0 +1,113 @@
+/* Scoped Club Profile container */
+.club-profile {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f0f0f0; /* Light grey background */
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    color: #333; /* Dark text for better contrast */
+  }
+  
+  /* Scoped heading */
+  .club-profile h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Darker text for heading */
+  }
+  
+  /* Scoped profile form styling */
+  .club-profile .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between form elements */
+  }
+  
+  /* Scoped form group */
+  .club-profile .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .club-profile .form-group label {
+    font-weight: 500;
+    color: #3498db; /* Blue color for labels */
+    font-size: 1.1rem;
+  }
+  
+  .club-profile .form-group input,
+  .club-profile .form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on focus */
+  }
+  
+  .club-profile .form-group input::placeholder {
+    color: #aaa;
+  }
+  
+  .club-profile .form-group input:focus,
+  .club-profile .form-group select:focus {
+    border-color: #3498db; /* Focused border color */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5); /* Subtle glow on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  /* Scoped submit button */
+  .club-profile .submit-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 50px; /* Rounded corners for the button */
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    width: 220px;
+    margin: 0 auto;
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2); /* Shadow on button */
+  }
+  
+  .club-profile .submit-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+    transform: translateY(-3px); /* Lift effect on hover */
+  }
+  
+  .club-profile .submit-btn:active {
+    transform: translateY(1px); /* Button slightly pressed on click */
+  }
+  
+  .club-profile .submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.8); /* Focus glow */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .club-profile {
+      padding: 20px;
+    }
+  
+    .club-profile .profile-form {
+      padding: 15px;
+    }
+  
+    .club-profile .submit-btn {
+      width: 100%;
+    }
+  
+    .club-profile h2 {
+      font-size: 1.8rem;
+    }
+  }
+  

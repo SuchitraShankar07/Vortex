@@ -1,0 +1,147 @@
+/* Container for the contact page */
+.contact-container {
+    
+    padding: 30px;
+    background-color: #f0f0f0; /* Light grey background */
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1); /* Soft shadow */
+    color: #f8f2f2;
+/* Ensure full screen height */
+}
+
+.contact-form-container {
+width: 100%;
+max-width: 600px;
+background-color: #fff;
+padding: 30px;
+border-radius: 15px;
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+color: #333;
+}
+
+/* Scoped headings */
+.contact-container h1 {
+font-size: 2.5rem;
+text-align: center;
+color: #014463; /* Darker text for the main heading */
+margin-bottom: 20px;
+}
+
+.contact-container h2 {
+font-size: 2rem;
+color: #014463; /* Darker text for the subheading */
+margin-top: 30px;
+text-align: center;
+}
+
+/* Scoped contact form styling */
+.contact-form {
+display: flex;
+flex-direction: column;
+gap: 20px; /* Space between form elements */
+}
+
+.formGroup {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.formGroup label {
+font-weight: 500;
+color: #03a5a5; /* Blue color for labels */
+font-size: 1.1rem;
+}
+
+.contact-input {
+width: 100%;
+padding: 12px;
+font-size: 1rem;
+border: 2px solid #ccc;
+border-radius: 8px;
+background-color: #fff;
+color: #333;
+transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-input:focus {
+border-color: #3498db;
+box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+outline: none;
+}
+
+.contact-error {
+color: #e74c3c;
+font-size: 0.9rem;
+}
+
+/* Scoped submit button */
+.contact-button {
+background-color: #3498db;
+color: white;
+border: none;
+padding: 15px 30px;
+font-size: 1.1rem;
+cursor: pointer;
+border-radius: 50px;
+text-transform: uppercase;
+font-weight: 600;
+letter-spacing: 1px;
+transition: all 0.3s ease;
+width: 220px;
+margin: 0 auto; /* Center the button */
+box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+}
+
+.contact-button:hover {
+background-color: #2980b9;
+transform: translateY(-3px);
+}
+
+.contact-button:active {
+transform: translateY(1px);
+}
+
+.contact-button:focus {
+outline: none;
+box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+}
+
+/* Feedback list styling */
+.feedbackList {
+list-style: none;
+padding: 0;
+}
+
+.feedbackItem {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+.contact-container {
+  padding: 20px;
+}
+
+.contact-form-container {
+  padding: 20px;
+}
+
+.contact-button {
+  width: 100%;
+}
+
+.contact-container h1 {
+  font-size: 2rem;
+}
+
+.contact-container h2 {
+  font-size: 1.4rem;
+}
+}

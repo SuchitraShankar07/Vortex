@@ -1,160 +1,210 @@
-/* HostEvent.css */
+/* Scoped HostEvent container */
 .host-event {
-    padding: 30px;
-    background-color: #f0f0f0; /* Light grey background for a fresh look */
-    max-width: 900px;
-    margin: 0 auto;
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    color: #333; /* Dark text for better contrast */
+  padding: 30px;
+  background-color: #f0f0f0; /* Light grey background */
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1); /* Soft shadow */
+  color: #f8f2f2;
+}
+
+/* Scoped headings */
+.host-event h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #014463; /* Darker text for the main heading */
+  margin-bottom: 20px;
+}
+
+/* Scoped event form styling */
+.host-event .event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Increased space between form elements */
+}
+
+.host-event .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased space between label and input */
+}
+
+/* Row 1 (Event name, Club name) */
+.host-event .form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px; /* Increased space between form elements in the same row */
+}
+
+.host-event .form-row .form-group {
+  flex: 1; /* Make the form groups take up equal space */
+}
+
+/* Row 2 (Description) */
+.host-event .form-group.description {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased space within the description group */
+}
+
+/* Row 3 (Date & Time and Campus) */
+.host-event .form-row-date-time {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px; /* Increased space between form elements in the same row */
+}
+
+.host-event .form-row-date-time .form-group {
+  flex: 1; /* Make the form groups take up equal space */
+}
+
+/* Row 4 (Venue and Image upload) */
+.host-event .form-row-venue-image {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px; /* Increased space between form elements in the same row */
+}
+
+.host-event .form-row-venue-image .form-group {
+  flex: 1; /* Make the form groups take up equal space */
+}
+
+.host-event .form-group label {
+  font-weight: 500;
+  color: #03a5a5; /* Blue color for labels */
+  font-size: 1.1rem;
+}
+
+.host-event .form-group input,
+.host-event .form-group textarea,
+.host-event .form-group select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.host-event .form-group input[type="file"] {
+  padding: 5px;
+}
+
+.host-event .form-group input:focus,
+.host-event .form-group textarea:focus,
+.host-event .form-group select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+  outline: none;
+}
+
+/* Scoped submit button */
+.host-event .submit-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 50px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  width: 220px;
+  margin: 0 auto;
+  box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+}
+
+.host-event .submit-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-3px);
+}
+
+.host-event .submit-btn:active {
+  transform: translateY(1px);
+}
+
+.host-event .submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+}
+
+.host-event .form-group input:hover,
+.host-event .form-group textarea:hover,
+.host-event .form-group select:hover {
+  border-color: #3498db;
+}
+
+/* Image upload styling */
+.host-event .input-file-container {
+  position: relative;
+}
+
+.host-event .input-file-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.host-event .input-file-label:hover {
+  background-color: #2980b9;
+}
+
+.host-event .input-file-label:active {
+  background-color: #1c6187;
+}
+
+.host-event .input-file {
+  display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .host-event {
+    padding: 20px;
   }
-  
-  h1 {
-    font-size: 2.5rem;
-    text-align: center;
-    color: #2c3e50; /* Darker text for the main heading */
-    margin-bottom: 20px;
+
+  .host-event .event-form {
+    padding: 15px;
   }
-  
-  h2 {
-    font-size: 1.8rem;
-    color: #34495e; /* Slightly lighter text for the sub-heading */
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .event-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Space between form elements */
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .form-group label {
-    font-weight: 500;
-    color: #3498db; /* Blue color for labels */
-    font-size: 1.1rem;
-  }
-  
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
+
+  .host-event .submit-btn {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    color: #333;
-    transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
   }
-  
-  .form-group input[type="file"] {
-    padding: 5px;
+
+  .host-event h1 {
+    font-size: 2rem;
   }
-  
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    border-color: #3498db; /* Focused input border color */
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5); /* Subtle glow on focus */
-    outline: none; /* Remove default outline */
+
+  .host-event h2 {
+    font-size: 1.4rem;
   }
-  
-  .submit-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 50px; /* Rounded corners for the button */
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    width: 220px;
-    margin: 0 auto;
-    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2); /* Shadow on button */
+
+  /* Stack rows for smaller screens */
+  .host-event .form-row,
+  .host-event .form-row-date-time,
+  .host-event .form-row-venue-image {
+    flex-direction: column;
   }
-  
-  .submit-btn:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-    transform: translateY(-3px); /* Lift effect on hover */
-  }
-  
-  .submit-btn:active {
-    transform: translateY(1px); /* Button slightly pressed on click */
-  }
-  
-  .submit-btn:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.8); /* Focus glow */
-  }
-  
-  .form-group input:hover,
-  .form-group textarea:hover,
-  .form-group select:hover {
-    border-color: #3498db; /* Highlight borders on hover */
-  }
-  
-  /* Image upload styling */
-  .input-file-container {
-    position: relative;
-  }
-  
-  .input-file-label {
-    position: absolute;
-    top: 0;
-    left: 0;
+
+  .host-event .form-row .form-group,
+  .host-event .form-row-date-time .form-group,
+  .host-event .form-row-venue-image .form-group {
+    flex: unset; /* Remove equal space distribution */
     width: 100%;
-    padding: 12px;
-    background-color: #3498db;
-    color: #fff;
-    text-align: center;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    gap: 20px; /* Ensure full-width for inputs on smaller screens */
   }
-  
-  .input-file-label:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-  }
-  
-  .input-file-label:active {
-    background-color: #1c6187; /* Even darker blue on active */
-  }
-  
-  .input-file {
-    display: none;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .host-event {
-      padding: 20px;
-    }
-  
-    .event-form {
-      padding: 15px;
-    }
-  
-    .submit-btn {
-      width: 100%;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
-  
-    h2 {
-      font-size: 1.4rem;
-    }
-  }
-  
+}

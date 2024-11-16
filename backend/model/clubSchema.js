@@ -10,7 +10,7 @@ const clubSchema = new mongoose.Schema({
     collection: "clubs"
 });
 
-module.exports = mongoose.model("Club", clubSchema);
+module.exports = mongoose.model("clubSchema", clubSchema);
 /*club head name 
 club name
 club details

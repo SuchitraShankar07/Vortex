@@ -5,13 +5,13 @@ const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true, minlength: 3 },
     email: { type: String, required: true, unique: true },
     phone: { type: String },
-    password: { type: String, required: true },  // hashed password
-    bookedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
-    attendedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Attendance" }]  
+    password: { type: String, required: true },  
+    bookedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "events" }],
+    attendedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "attendance" }]  
     
 }, {
     timestamps: true,
     collection : "users"
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("userSchema", userSchema);

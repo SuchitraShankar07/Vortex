@@ -9,5 +9,5 @@ const attendanceSchema = new mongoose.Schema({
     collection: "attendance"
 });
 
-module.exports = mongoose.model("Attendance", attendanceSchema);
+module.exports = mongoose.model("attendanceSchema", attendanceSchema);
     

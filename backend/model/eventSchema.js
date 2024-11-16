@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const subSchema = new mongoose.Schema({
     _id:mongoose.Schema.Types.ObjectId,
-    "SRN": {type:String, required: true, minlength:13},
+    "SRN": {type:String, required: true, minlength:13, ref:"users"},
     "fullName": {type:String, required: true},
     "email" : {type:String},
     "phone" : {type:String}, ref:"users",

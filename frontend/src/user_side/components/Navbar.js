@@ -12,10 +12,11 @@ function Navbar() {
         <Link to="/events">Events</Link>
         <Link to="/attended-events">Attended Events</Link>
         <Link to="/details">Details</Link>
-        <Link to="/attendance">Log In Attendance</Link> {/* Updated route */}
+        <Link to="/attendance">Log In Attendance</Link>
       </div>
     </div>
   );
 }
 
 export default Navbar;
+

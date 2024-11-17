@@ -25,6 +25,17 @@ function HomePage() {
           marginTop: '50px',
           fontWeight: 'bold',
           animation: 'textFadeIn 2s ease-out',
+          transition: 'transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.transform = 'scale(1.2)';
+          e.target.style.color = '#00bfa6'; // Neon blue color
+          e.target.style.textShadow = '0 0 10px #00bfa6, 0 0 20px #00bfa6, 0 0 30px #00bfa6';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.transform = 'scale(1)';
+          e.target.style.color = '#00aced'; // Original color
+          e.target.style.textShadow = 'none';
         }}
       >
         Welcome to Vortex Events!
@@ -71,7 +82,6 @@ function HomePage() {
         </Link>
       </div>
 
-      {/* Home button to scroll to the top */}
       <div style={{ marginTop: '50px' }}>
         <a href="#home">
           <button
@@ -104,3 +114,4 @@ function HomePage() {
 }
 
 export default HomePage;
+

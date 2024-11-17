@@ -16,8 +16,7 @@ function ClubLogin() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
-      }
-    );
+      });
 
       const data = await response.json();
 
@@ -38,13 +37,12 @@ function ClubLogin() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-  
       <p>Enter your credentials to dive in.</p>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleLogin}>
         <input
-          type="string"
-          placeholder="email"
+          type="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -69,7 +67,7 @@ function ClubLogin() {
         Don't have an account?{' '}
         <span
           className="link"
-          onClick={() => navigate('/club/register')} 
+          onClick={() => navigate('/club/register')}
         >
           Register
         </span>

@@ -16,7 +16,7 @@ function UserRegister() {
   const navigate = useNavigate();
 
   const validateInputs = () => {
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const emailRegex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/;
     const phoneRegex = /^\d{10}$/;
     const srnRegex = /^.{13}$/; 
 

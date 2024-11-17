@@ -4,45 +4,61 @@ const Club = require("../model/clubSchema");
 const Event = require("../model/eventSchema");
 const Attendance = require("../model/attendanceSchema");
 exports.registerClub = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        
-        const existingClub = await Club.findOne({ email });
-        if (existingClub) {
-            return res.status(400).json({ error: "SRN already in use" });
+        const { clubName, email, phone, password } = req.body;
+    
+        if (!clubName || !email || !phone || !password) {
+            return res.status(400).json({ message: "All fields are required." });
         }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const club = await Club.create({ ...req.body, password: hashedPassword });
-
-        res.status(201).json(club);
-    } catch (err) {
-        console.error(err);  
-        res.status(400).json({ error: err.message });
-    }
-};
+    
+        try {
+            // Store the password in plaintext (not recommended for production)
+            const newClub = await Club.create({
+                clubName,
+                email,
+                phone,
+                password, // saving plaintext password
+            });
+    
+            res.status(201).json({ message: "Club registered successfully!", club: newClub });
+        } catch (error) {
+            console.error(error);
+            res.status(400).json({ message: "Error registering club.", error });
+        }
+    };
+    
 
 
 exports.loginClub = async (req, res) => {
-    try {
         const { email, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
- 
-        const club = await Club.findOne({ email: req.body.email });
-        if (!club || !(await bcrypt.compare(req.body.password, club.password))) {
-  
-            console.log(club.password);
-            return res.status(401).json({ error: "Invalid credentials" });
-
+    
+        console.log("Received Login Request:", email, password);
+    
+        if (!email || !password) {
+            console.log("Missing credentials");
+            return res.status(400).json({ error: "All fields are required." });
         }
-       
-        console.log(club.password);
-        // const token = jwt.sign({ id: club._id, role: "club" }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        // res.json({ token });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-};
+    
+        try {
+            const club = await Club.findOne({ email: email.toLowerCase() });
+            console.log("Found Club:", club);
+    
+            if (!club) {
+                return res.status(401).json({ error: "Invalid email or password" });
+            }
+    
+            // Direct comparison of the password
+            if (club.password !== password) {
+                console.log("Password mismatch");
+                return res.status(401).json({ error: "Invalid email or password" });
+            }
+    
+            res.json({ message: "Login successful!" });
+        } catch (err) {
+            console.error("Login Error:", err.message);
+            res.status(500).json({ error: "Server error. Please try again." });
+        }
+    };
+    
 
 exports.createEvent = async (req, res) => {
     try {

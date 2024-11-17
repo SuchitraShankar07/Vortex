@@ -1,84 +1,98 @@
 /* General styles for the entire page */
 body {
-    margin: 0;
-    padding: 0;
-    font-family:cursive;
-    background-color: #000; /* Black background */
-    color: #fff; /* White text */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; /* Changed cursive to a more standard font */
+  background-color: #000; /* Black background */
+  color: #fff; /* White text */
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #000; /* Black background for navbar */
+  position: relative; /* Ensure positioning for toggle button */
+}
+
+/* Logo styles */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 40px;  /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between the logo and text */
+}
+
+.navbar-logo h2 {
+  margin: 0;
+  color: #fff; /* White font for the logo */
+  font-size: 1.5rem;
+}
+
+/* Navbar links styles */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #fff; /* White font for links */
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid #40e0d0; /* Turquoise border */
+  border-radius: 25px; /* Rounded corners */
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.nav-links a:hover {
+  background-color: #40e0d0; /* Turquoise background on hover */
+  color: #000; /* Black text on hover */
+}
+
+/* Toggle button for mobile view */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  position: absolute; /* Position it on the right */
+  top: 1.5rem;
+  right: 2rem;
+  cursor: pointer;
+}
+
+/* Mobile view: Hide links, show toggle */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background-color: #000; /* Ensure background color for dropdown */
+    position: absolute; /* Position it below the navbar */
+    top: 5rem;
+    left: 0;
+    padding: 1rem 0;
+    transition: max-height 0.3s ease-in-out; /* Smooth transition for expanding */
   }
 
-  .navbar-logo {
+  .nav-links.open {
     display: flex;
-    align-items: center;
   }
-  
-  .logo {
-    width: 40px;  /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Space between the logo and text */
-  }
-  
-  
-  /* Navbar styles */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #000; /* Black background for navbar */
-  }
-  
-  .navbar-logo h2 {
-    margin: 0;
-    color: #fff; /* White font for the logo */
-    font-size: 1.5rem;
-  }
-  
-  /* Navbar links */
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
+
   .nav-links a {
-    color: #fff; /* White font for links */
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 2px solid #40e0d0; /* Turquoise border */
-    border-radius: 25px; /* Rounded corners */
-    font-size: 1rem;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 1rem 0; /* Adjust padding for better spacing in mobile view */
   }
-  
-  .nav-links a:hover {
-    background-color: #40e0d0; /* Turquoise background on hover */
-    color: #000; /* Black text on hover */
-  }
-  
-  /* Toggle button for mobile view */
+
   .nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
+    display: block;
   }
-  
-  /* Mobile view: Hide links, show toggle */
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      text-align: center;
-    }
-  
-    .nav-links.open {
-      display: flex;
-    }
-  
-    .nav-toggle {
-      display: block;
-    }
-  }
-  
+}

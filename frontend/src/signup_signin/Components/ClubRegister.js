@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function ClubRegister() {
   const [clubName, setClubName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');  // Added phone state
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -24,7 +24,7 @@ function ClubRegister() {
       const response = await fetch('http://localhost:5000/api/club/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clubName, email,  password}),  // Send phone number in the request
+        body: JSON.stringify({ clubName, email, phone, password }),  // Send phone number in the request
       });
       const data = await response.json();
 
@@ -69,7 +69,7 @@ function ClubRegister() {
           type="tel"
           placeholder="Phone"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}  // Update phone state
+          onChange={(e) => setPhone(e.target.value)}
           required
         />
         <input

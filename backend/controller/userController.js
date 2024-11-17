@@ -29,51 +29,74 @@ exports.attendedEvents = async( req, res) =>{
 //         res.status(400).json({ error: err.message });
 //     }
 // };
-
 exports.registerUser = async (req, res) => {
-  try {
-    const { fullName, email, password } = req.body;
+    const { SRN, phone, fullName, email, password } = req.body;
 
-    // Validation
-    if (!fullName || !email || !password) {
-      return res.status(400).json({ message: 'All fields are required.' });
+    if (!SRN || !phone || !fullName || !email || !password) {
+        return res.status(400).json({ message: "All fields are required." });
     }
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(409).json({ message: 'Email already registered.' });
+    try {
+        // Store SRN in lowercase
+        const newUser = await User.create({
+            SRN: SRN.toLowerCase(),
+            phone,
+            fullName,
+            email,
+            password,
+        });
+
+        res.status(201).json({ message: "User registered successfully!", user: newUser });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: "Error registering user.", error });
     }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
-    const user = new User({
-      fullName,
-      email,
-      password: hashedPassword,
-    });
-
-    await user.save();
-
-    res.status(201).json({ message: 'User registered successfully!' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Internal Server Error.' });
-  }
 };
 
 
+// exports.loginUser = async (req, res) => {
+//     try {
+//         const user = await User.findOne({ email: req.body.email });
+//         if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+//             return res.status(401).json({ error: "Invalid credentials" });
+//         }
+//         const token = jwt.sign({ id: user._id, role: "user" }, process.env.JWT_SECRET, { expiresIn: "1h" });
+//         res.json({ token });
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// };
 exports.loginUser = async (req, res) => {
+    const { SRN, password } = req.body;
+
+    console.log("Received Login Request:", SRN, password);
+
+    if (!SRN || !password) {
+        console.log("Missing credentials");
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
     try {
-        const user = await User.findOne({ email: req.body.email });
-        if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-            return res.status(401).json({ error: "Invalid credentials" });
+        const user = await User.findOne({ SRN: SRN.toLowerCase() });
+        console.log("Found User:", user);
+
+        if (!user) {
+            return res.status(401).json({ error: "Invalid SRN or password" });
         }
-        const token = jwt.sign({ id: user._id, role: "user" }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        res.json({ token });
+
+        const isPasswordValid = await password.localeCompare( user.password);
+        console.log("Password Validity:", isPasswordValid);
+
+        if (isPasswordValid) {
+            return res.status(401).json({ error: "Invalid SRN or password" });
+        }
+
+       
+
+        res.json({message: "Login successful!" });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.error("Login Error:", err.message);
+        res.status(500).json({ error: "Server error. Please try again." });
     }
 };
 

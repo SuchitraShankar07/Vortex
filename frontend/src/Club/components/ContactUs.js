@@ -46,7 +46,7 @@ class ContactPage extends Component {
       };
 
       // Using fetch instead of Axios
-      fetch("https://eventhub-t514.onrender.com/eventRoute/post-feedback", {
+      fetch("http://localhost:5000/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

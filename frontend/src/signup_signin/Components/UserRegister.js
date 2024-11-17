@@ -3,39 +3,81 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 function UserRegister() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    SRN: '',
+    password: '',
+    confirmPassword: '',
+  });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
+  const validateInputs = () => {
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const phoneRegex = /^\d{10}$/;
+    const srnRegex = /^.{13}$/; 
+
+    if (formData.fullName.trim().length < 3) {
+      setError('Full name must be at least 3 characters long.');
+      return false;
+    }
+    if (!emailRegex.test(formData.email)) {
+      setError('Invalid email format.');
+      return false;
+    }
+    if (!phoneRegex.test(formData.phone)) {
+      setError('Phone number must be exactly 10 digits.');
+      return false;
+    }
+    if (!srnRegex.test(formData.SRN)) {
+      setError('SRN must be exactly 13 characters long.');
+      return false;
+    }
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return false;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match.');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
+    if (!validateInputs()) return;
 
     try {
       const response = await fetch('http://localhost:5000/api/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, password }),
+        body: JSON.stringify(formData),
       });
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess('Registration successful!');
-        setTimeout(() => navigate('/user/dashboard'), 2000); 
+        setSuccess('Registration successful! Redirecting...');
+        setTimeout(() => {
+          setSuccess('');
+          navigate('/user/dashboard');
+        }, 2000); // Redirect to login page after 2 seconds
       } else {
         setError(data.message || 'Registration failed. Please try again.');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError('Unable to connect to the server. Please try again.');
     }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError('');
   };
 
   return (
@@ -52,31 +94,50 @@ function UserRegister() {
       <form onSubmit={handleRegister}>
         <input
           type="text"
+          name="fullName"
           placeholder="Full Name"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          value={formData.fullName}
+          onChange={handleChange}
           required
         /><br />
         <input
           type="email"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email}
+          onChange={handleChange}
           required
-        />
-        <br />
+        /><br />
         <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          type="text"
+          name="phone"
+          placeholder="Phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+        /><br />
+        <input
+          type="text"
+          name="SRN"
+          placeholder="SRN"
+          value={formData.SRN}
+          onChange={handleChange}
           required
         /><br />
         <input
           type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        /><br />
+        <input
+          type="password"
+          name="confirmPassword"
           placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={formData.confirmPassword}
+          onChange={handleChange}
           required
         /><br />
         <motion.button
@@ -90,12 +151,13 @@ function UserRegister() {
       </form>
       <p>
         Already have an account?{' '}
-        <span
+        <motion.span
           className="link"
           onClick={() => navigate('/')}
+          whileHover={{ textDecoration: 'underline', cursor: 'pointer' }}
         >
           Login
-        </span>
+        </motion.span>
       </p>
     </motion.div>
   );

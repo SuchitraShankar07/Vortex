@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import GenerateQR from './GenerateQR'; 
-import ScanQR from './ScanQR'; 
+import GenerateQR from './GenerateQR';
+import ScanQR from './ScanQR';
 
 function AttendancePage() {
   const [referenceNumber, setReferenceNumber] = useState('');
   const [eventId, setEventId] = useState('');
   const [showQR, setShowQR] = useState(false);
 
+  // Handle the "Generate QR" button click
   const handleGenerateQR = () => {
     if (referenceNumber.trim() === '' || eventId.trim() === '') {
       alert('Please enter both Reference Number and Event ID.');
     } else {
-      setShowQR(true);
+      setShowQR(true); // Show the QR code
     }
   };
 
@@ -92,7 +93,7 @@ function AttendancePage() {
         )}
       </div>
       <div style={{ marginTop: '30px' }}>
-        <ScanQR /> {/* Assuming ScanQR component is ready to handle QR scanning */}
+        <ScanQR /> {/* Scan QR component to handle attendance scanning */}
       </div>
     </div>
   );

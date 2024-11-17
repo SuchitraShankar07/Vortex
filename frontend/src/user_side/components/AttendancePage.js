@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import GenerateQR from './GenerateQR'; // Assuming GenerateQR component is already defined
-import ScanQR from './ScanQR'; // Assuming ScanQR component is already defined
+import GenerateQR from './GenerateQR'; 
+import ScanQR from './ScanQR'; 
 
 function AttendancePage() {
   const [referenceNumber, setReferenceNumber] = useState('');

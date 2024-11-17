@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar'; 
 import HomePage from './components/HomePage'; 
 // import './UserMain.css'
@@ -9,9 +9,7 @@ function UserMain() {
       <div className="container">
         <Navbar /> 
         <Routes>
-          {/* HomePage route */}
           <Route path="/" element={<HomePage />} />
-
         </Routes>
       </div>
 

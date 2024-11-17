@@ -16,12 +16,34 @@ exports.getEventById = (req, res) => {
     });
 };
 
-exports.createEvent = (req, res) => {
-    Event.create(req.body, (err, data) => {
-        if (err) return res.status(400).json({ error: err.message });
-        res.json(data);
-    });
-};
+exports.createEvent = async (req, res) => {
+    try {
+        const { eventName, description, campus, venue, date, organizer } = req.body;
+    
+        // Validate required fields
+        if (!eventName || !description || !campus || !venue || !date || !organizer) {
+          return res.status(400).json({ error: "All fields are required" });
+        }
+    
+        // Create and save the new event
+        const newEvent = new Event({
+          eventName,
+          description,
+          campus,
+          venue,
+          date,
+          organizer,
+        });
+    
+        await newEvent.save();
+    
+        res.status(201).json({ message: "Event created successfully", event: newEvent });
+      } catch (err) {
+        console.error("Error creating event:", err);
+        res.status(500).json({ error: "Server error" });
+      }
+    }
+
 
 exports.updateEventById = (req, res) => {
     Event.findByIdAndUpdate(

@@ -24,7 +24,7 @@ router.get("/user/generate-qr/:eventId", authenticate, userController.generateQR
 // event routes
 router.route("/events")
     .get(eventController.getAllEvents)
-    .post(authenticate, eventController.createEvent);
+    .post( eventController.createEvent);
 
 router.route("/events/:id")
     .get(eventController.getEventById)

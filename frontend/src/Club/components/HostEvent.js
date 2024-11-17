@@ -2,44 +2,56 @@ import React, { useState } from 'react';
 import './HostEvent.css'; // Assuming you will create styles for the form
 import { useNavigate } from 'react-router-dom';
 
-const HostEvent = ({ onAddEvent }) => {
+const HostEvent = () => {
   const [eventName, setEventName] = useState('');
   const [clubName, setClubName] = useState('');
   const [description, setDescription] = useState('');
   const [dateTime, setDateTime] = useState('');
   const [campus, setCampus] = useState('RR');
   const [venue, setVenue] = useState('Seminar Hall 1');
-  const [eventImage, setEventImage] = useState(null);
-
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // Handle the form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const newEvent = {
+  
+    // Prepare the payload
+    const payload = {
       eventName,
-      clubName,
       description,
-      dateTime,
       campus,
       venue,
-      eventImage: URL.createObjectURL(eventImage),
+      date: dateTime, // Ensure this matches the backend's expected "date"
+      organizer: clubName, // Match backend schema
     };
-
-    onAddEvent(newEvent);  // Pass the event to parent component
-
-    // Clear form
-    setEventName('');
-    setClubName('');
-    setDescription('');
-    setDateTime('');
-    setCampus('RR');
-    setVenue('Seminar Hall 1');
-    setEventImage(null);
-
-    // Navigate to View Events page
-    navigate('/view-events');
+  
+    try {
+      // Send POST request to backend
+      const response = await fetch("http://localhost:5000/api/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to create event");
+      }
+  
+      // Clear the form after submission
+      setEventName("");
+      setDescription("");
+      setCampus("RR");
+      setVenue("Seminar Hall 1");
+      setDateTime("");
+      setClubName("");
+  
+      // Redirect to the View Events page
+      navigate("/view-events");
+    } catch (error) {
+      console.error("Error creating event:", error);
+    }
   };
+  
 
   return (
     <div className="host-event">
@@ -101,8 +113,8 @@ const HostEvent = ({ onAddEvent }) => {
           </div>
         </div>
 
-        {/* Row 4 - Venue and Image Upload */}
-        <div className="form-row-venue-image">
+        {/* Row 4 - Venue */}
+        <div className="form-row-venue">
           <div className="form-group">
             <label>Venue:</label>
             <input
@@ -119,14 +131,6 @@ const HostEvent = ({ onAddEvent }) => {
               <option value="MRD Auditorium" />
               <option value="CIE Room" />
             </datalist>
-          </div>
-          <div className="form-group">
-            <label>Event Image:</label>
-            <input
-              type="file"
-              onChange={(e) => setEventImage(e.target.files[0])}
-              required
-            />
           </div>
         </div>
 

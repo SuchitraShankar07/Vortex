@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar'; // Ensure 'Navbar' is correctly imported
+import Navbar from './components/Navbar'; 
 import Home from './components/Home';
 import HostEvent from './components/HostEvent';
 import ReserveVenue from './components/ReserveVenue';
@@ -21,9 +22,9 @@ function ClubMain() {
 
   return (
     <div className="App">
-      <Navbar /> {/* Navbar appears on all pages */}
+      <Navbar /> 
       <Routes>
-        <Route path="/" element={<Home />} /> {/* Default Route */}
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/host" element={<HostEvent onAddEvent={handleAddEvent} />} />
         <Route path="/view-events" element={<ViewEvents events={events} />} />

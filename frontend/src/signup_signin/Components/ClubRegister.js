@@ -21,10 +21,10 @@ function ClubRegister() {
     }
 
     try {
-      const response = await fetch('http://localhost:80/api/club/register', {
+      const response = await fetch('http://localhost:5000/api/club/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clubName, email,  password, phone}),  // Send phone number in the request
+        body: JSON.stringify({ clubName, email,  password}),  // Send phone number in the request
       });
       const data = await response.json();
 

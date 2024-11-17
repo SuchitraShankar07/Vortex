@@ -9,7 +9,7 @@ exports.registerClub = async (req, res) => {
         
         const existingClub = await Club.findOne({ email });
         if (existingClub) {
-            return res.status(400).json({ error: "Email already in use" });
+            return res.status(400).json({ error: "SRN already in use" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -25,12 +25,20 @@ exports.registerClub = async (req, res) => {
 
 exports.loginClub = async (req, res) => {
     try {
+        const { email, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+ 
         const club = await Club.findOne({ email: req.body.email });
         if (!club || !(await bcrypt.compare(req.body.password, club.password))) {
+  
+            console.log(club.password);
             return res.status(401).json({ error: "Invalid credentials" });
+
         }
-        const token = jwt.sign({ id: club._id, role: "club" }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        res.json({ token });
+       
+        console.log(club.password);
+        // const token = jwt.sign({ id: club._id, role: "club" }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        // res.json({ token });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

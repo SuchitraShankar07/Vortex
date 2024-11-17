@@ -3,7 +3,7 @@ import './Navbar.css';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
-const Navbar = () => {  // Make sure this is uppercase
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -17,14 +17,13 @@ const Navbar = () => {  // Make sure this is uppercase
         <h2>Vortex</h2>
       </div>
       <div className={`nav-links ${isOpen ? 'open' : ''}`}>
-        <Link to="/home">Home</Link>
+        <Link to="/club/dashboard">Home</Link>
         <Link to="/host">Host Event</Link>
-        <Link to="/view">View Events</Link> {/* Link to Host Event page */}
+        <Link to="/view-events">View Events</Link>
         <Link to="/venue">Reserve Venue</Link>
         <Link to="/attendance">Attendance</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/profile">Profile</Link>
-        
       </div>
       <button className="nav-toggle" onClick={toggleNavbar}>
         <span className="toggle-icon">{isOpen ? 'X' : '☰'}</span>
@@ -33,4 +32,4 @@ const Navbar = () => {  // Make sure this is uppercase
   );
 };
 
-export default Navbar; // Make sure this is capitalized
+export default Navbar;

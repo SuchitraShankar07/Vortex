@@ -29,7 +29,7 @@ function UserRegister() {
 
       if (response.ok) {
         setSuccess('Registration successful!');
-        setTimeout(() => navigate('/'), 2000); // Redirect to login page after success
+        setTimeout(() => navigate('/user/dashboard'), 2000); // Redirect to login page after success
       } else {
         setError(data.message || 'Registration failed. Please try again.');
       }
@@ -56,7 +56,7 @@ function UserRegister() {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           required
-        />
+        /><br />
         <input
           type="email"
           placeholder="Email"
@@ -64,20 +64,21 @@ function UserRegister() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <br />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+        /><br />
         <input
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-        />
+        /><br />
         <motion.button
           className="toggle"
           type="submit"

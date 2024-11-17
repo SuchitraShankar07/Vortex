@@ -11,7 +11,7 @@ function UserLogin() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/users/login', {
+      const response = await fetch('http://localhost:80/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ SRN: srn, password }),
@@ -19,7 +19,7 @@ function UserLogin() {
       const data = await response.json();
 
       if (response.ok) {
-        navigate('/user/dashboard'); // Redirect to user dashboard
+        navigate('/user/dashboard'); 
       } else {
         setError(data.message || 'Invalid credentials');
       }

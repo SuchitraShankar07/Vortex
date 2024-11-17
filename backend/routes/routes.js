@@ -6,20 +6,20 @@ const feedbackController = require("../controller/feedbackController");
 const authenticate = require("../middleware/auth");
 const router = express.Router();
 // authentication
-router.post("/users/register", userController.registerUser);
-router.post("/users/login", userController.loginUser);
+router.post("/user/register", userController.registerUser);
+router.post("/user/login", userController.loginUser);
 
 
 router
-    .route("/users/:id")
+    .route("/user/:id")
     .get(authenticate, userController.getUserById)
     .put(authenticate, userController.updateUserById)
     .delete(authenticate, userController.deleteUserById);
 
 // Event Interaction
-router.get("/users/attended-events", authenticate, userController.attendedEvents);
-router.post("/users/book-event/:eventId", authenticate, userController.bookEvent);
-router.get("/users/generate-qr/:eventId", authenticate, userController.generateQR);
+router.get("/user/attended-events", authenticate, userController.attendedEvents);
+router.post("/user/book-event/:eventId", authenticate, userController.bookEvent);
+router.get("/user/generate-qr/:eventId", authenticate, userController.generateQR);
 
 // event routes
 router.route("/events")

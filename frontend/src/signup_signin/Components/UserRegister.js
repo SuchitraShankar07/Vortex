@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import './UserRegister.css';
 
 function UserRegister() {
   const [formData, setFormData] = useState({
@@ -66,7 +67,7 @@ function UserRegister() {
         setTimeout(() => {
           setSuccess('');
           navigate('/user/dashboard');
-        }, 2000); // Redirect to login page after 2 seconds
+        }, 2000); // Redirect to dashboard after 2 seconds
       } else {
         setError(data.message || 'Registration failed. Please try again.');
       }
@@ -87,78 +88,105 @@ function UserRegister() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2>User Register</h2>
-      <p>Fill in your details to register.</p>
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
+      <motion.h2
+        className="form-title"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: 'backOut' }}
+      >
+        Welcome!
+      </motion.h2>
+      <motion.p
+        className="form-subtitle"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
+        Sign up and get started!
+      </motion.p>
+      {error && <p className="error-msg">{error}</p>}
+      {success && <p className="success-msg">{success}</p>}
       <form onSubmit={handleRegister}>
-        <input
+        <motion.input
           type="text"
           name="fullName"
           placeholder="Full Name"
           value={formData.fullName}
           onChange={handleChange}
+          className="input-field"
+          whileFocus={{ borderColor: '#40e0d0' }}
           required
-        /><br />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        /><br />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        /><br />
-        <input
+        />
+        <motion.input
           type="text"
           name="SRN"
           placeholder="SRN"
           value={formData.SRN}
           onChange={handleChange}
+          className="input-field"
+          whileFocus={{ borderColor: '#40e0d0' }}
           required
-        /><br />
-        <input
+        />
+        <motion.input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          className="input-field"
+          whileFocus={{ borderColor: '#40e0d0' }}
+          required
+        />
+        <motion.input
+          type="text"
+          name="phone"
+          placeholder="Phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className="input-field"
+          whileFocus={{ borderColor: '#40e0d0' }}
+          required
+        />
+        <motion.input
           type="password"
           name="password"
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          className="input-field"
+          whileFocus={{ borderColor: '#40e0d0' }}
           required
-        /><br />
-        <input
+        />
+        <motion.input
           type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
           value={formData.confirmPassword}
           onChange={handleChange}
+          className="input-field"
+          whileFocus={{ borderColor: '#40e0d0' }}
           required
-        /><br />
+        />
         <motion.button
-          className="toggle"
           type="submit"
-          whileHover={{ scale: 1.05 }}
+          className="register-button"
+          whileHover={{ scale: 1.1, backgroundColor: '#20b2aa' }}
           whileTap={{ scale: 0.95 }}
         >
           Register
         </motion.button>
       </form>
-      <p>
+      <motion.p
+        className="login-prompt"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      >
         Already have an account?{' '}
-        <motion.span
-          className="link"
-          onClick={() => navigate('/')}
-          whileHover={{ textDecoration: 'underline', cursor: 'pointer' }}
-        >
+        <span className="login-link" onClick={() => navigate('/')}>
           Login
-        </motion.span>
-      </p>
+        </span>
+      </motion.p>
     </motion.div>
   );
 }

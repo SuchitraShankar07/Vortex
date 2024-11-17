@@ -44,7 +44,6 @@ function HomePage() {
       </p>
 
       <div style={{ marginTop: '30px' }}>
-        {/* Link to the EventSelectionPage or other sections */}
         <Link to="/events">
           <button
             style={{

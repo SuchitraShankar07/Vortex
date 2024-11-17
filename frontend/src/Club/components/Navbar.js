@@ -18,10 +18,10 @@ const Navbar = () => {
       </div>
       <div className={`nav-links ${isOpen ? 'open' : ''}`}>
         <Link to="/club/dashboard">Home</Link>
-        <Link to="/host">Host Event</Link>
+        <Link to="/host-event">Host Event</Link>
         <Link to="/view-events">View Events</Link>
         <Link to="/venue">Reserve Venue</Link>
-        <Link to="/attendance">Attendance</Link>
+        <Link to="/attendance/check">Attendance</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/profile">Profile</Link>
       </div>

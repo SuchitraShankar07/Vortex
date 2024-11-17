@@ -10,8 +10,8 @@ function Navbar() {
         {/* Links styled to look elegant and with hover animation */}
         <Link to="/"><b>HOME</b></Link>
         <Link to="/events">Events</Link>
-        <Link to="#attended-events">Attended Events</Link>
-        <Link to="#details">Details</Link>
+        <Link to="/attended-events">Attended Events</Link>
+        <Link to="/details">Details</Link>
         <Link to="/attendance">Log In Attendance</Link> {/* Updated route */}
       </div>
     </div>

@@ -20,7 +20,7 @@ function UserRegister() {
     }
 
     try {
-      const response = await fetch('/api/users/register', {
+      const response = await fetch('http://localhost:5000/api/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fullName, email, password }),
@@ -29,7 +29,7 @@ function UserRegister() {
 
       if (response.ok) {
         setSuccess('Registration successful!');
-        setTimeout(() => navigate('/user/dashboard'), 2000); // Redirect to login page after success
+        setTimeout(() => navigate('/user/dashboard'), 2000); 
       } else {
         setError(data.message || 'Registration failed. Please try again.');
       }

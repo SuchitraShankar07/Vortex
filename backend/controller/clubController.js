@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
 const Club = require("../model/clubSchema");
 const Event = require("../model/eventSchema");
 const Attendance = require("../model/attendanceSchema");

@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
 const Event = require("../model/eventSchema");
@@ -15,19 +15,52 @@ exports.attendedEvents = async( req, res) =>{
         res.status(500).json({ error: err.message });
     }
 }
-exports.registerUser = async (req, res) => {
-    try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+// exports.registerUser = async (req, res) => {
+//     try {
+//         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         
-        // leaving out password from the response coz cybersekuriti or smn idk man
-        const user = await User.create({ ...req.body, password: hashedPassword });
-        const userWithoutPassword = user.toObject();
-        delete userWithoutPassword.password;
+//         // leaving out password from the response coz cybersekuriti or smn idk man
+//         const user = await User.create({ ...req.body, password: hashedPassword });
+//         const userWithoutPassword = user.toObject();
+//         delete userWithoutPassword.password;
 
-        res.status(201).json(userWithoutPassword); 
-    } catch (err) {
-        res.status(400).json({ error: err.message });
+//         res.status(201).json(userWithoutPassword); 
+//     } catch (err) {
+//         res.status(400).json({ error: err.message });
+//     }
+// };
+
+exports.registerUser = async (req, res) => {
+  try {
+    const { fullName, email, password } = req.body;
+
+    // Validation
+    if (!fullName || !email || !password) {
+      return res.status(400).json({ message: 'All fields are required.' });
     }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: 'Email already registered.' });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create new user
+    const user = new User({
+      fullName,
+      email,
+      password: hashedPassword,
+    });
+
+    await user.save();
+
+    res.status(201).json({ message: 'User registered successfully!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error.' });
+  }
 };
 
 

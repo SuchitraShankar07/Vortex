@@ -7,15 +7,15 @@ function Navbar() {
     <div className="navbar">
       <div className="logo">Vortex</div>
       <div className="nav-links">
-        {/* Links styled to look elegant and with hover animation */}
-        <Link to="/"><b>HOME</b></Link>
+        <Link to="/home"><b>HOME</b></Link> {/* Updated to /home */}
         <Link to="/events">Events</Link>
         <Link to="/attended-events">Attended Events</Link>
         <Link to="/details">Details</Link>
-        <Link to="/attendance">Log In Attendance</Link> {/* Updated route */}
+        <Link to="/attendance">Log In Attendance</Link>
       </div>
     </div>
   );
 }
 
 export default Navbar;
+

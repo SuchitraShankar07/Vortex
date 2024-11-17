@@ -25,7 +25,6 @@ class ContactPage extends Component {
     e.preventDefault();
     const errors = {};
     
-    // Form validation
     if (!this.state.name.trim()) {
       errors.name = 'Name is required';
     }
@@ -46,7 +45,7 @@ class ContactPage extends Component {
       };
 
       // Using fetch instead of Axios
-      fetch("http://localhost:5000/contact", {
+      fetch("http://localhost:5000/api/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

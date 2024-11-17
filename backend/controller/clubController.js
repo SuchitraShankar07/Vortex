@@ -1,5 +1,4 @@
-const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
+
 const Club = require("../model/clubSchema");
 const Event = require("../model/eventSchema");
 const Attendance = require("../model/attendanceSchema");
@@ -11,12 +10,12 @@ exports.registerClub = async (req, res) => {
         }
     
         try {
-            // Store the password in plaintext (not recommended for production)
+            
             const newClub = await Club.create({
                 clubName,
                 email,
                 phone,
-                password, // saving plaintext password
+                password, 
             });
     
             res.status(201).json({ message: "Club registered successfully!", club: newClub });
@@ -46,7 +45,6 @@ exports.loginClub = async (req, res) => {
                 return res.status(401).json({ error: "Invalid email or password" });
             }
     
-            // Direct comparison of the password
             if (club.password !== password) {
                 console.log("Password mismatch");
                 return res.status(401).json({ error: "Invalid email or password" });

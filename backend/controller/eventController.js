@@ -2,11 +2,14 @@
 const Event = require("../model/eventSchema");
 const mongoose = require("mongoose");
 
-exports.getAllEvents = (req, res) => {
-    Event.find((err, data) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(data);
-    });
+exports.getAllEvents = async(req, res) => {
+    try{
+        const events = await Event.find();
+        res.status(200).json(events);
+    }
+    catch(error){
+        res.status(500).json({message: error.message});
+    }
 };
 
 exports.getEventById = (req, res) => {

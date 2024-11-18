@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ViewEvents = () => {
+  // State variables
   const [events, setEvents] = useState([]);
   const [editingEvent, setEditingEvent] = useState(null);
   const [formData, setFormData] = useState({
@@ -11,25 +12,28 @@ const ViewEvents = () => {
     date: "",
     organizer: "",
   });
-
+  
   // Fetch all events
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/events");
+        const response = await fetch("http://localhost:5000/events");
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
-        const data = await response.json();
-        setEvents(data);
-      } catch (err) {
-        console.error("Error fetching events:", err);
-      }
-    };
-    fetchEvents();
+        return response.json();
+      })
+      .then((data) => {
+        setEvents(data.data.events || []); // Adjust based on backend response
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
-  // Handle input changes
+  // Handle input change for the form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -43,25 +47,22 @@ const ViewEvents = () => {
       description: event.description,
       campus: event.campus,
       venue: event.venue,
-      date: event.date.slice(0, 10), // Adjust date for input format
+      date: event.date,
       organizer: event.organizer,
     });
   };
-// Update an event
-const handleUpdate = async (e) => {
-  e.preventDefault();
 
-  try {
-  
-   
-
-    const response = await fetch(`http://localhost:5000/api/events/${editingEvent}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+  // Update an event
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/events/${editingEvent}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
     if (!response.ok) {
       throw new Error("Failed to update event");
@@ -116,6 +117,16 @@ const handleUpdate = async (e) => {
     });
   };
 
+  // Render loading or error messages
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // Main render
   return (
     <div className="manage-events">
       <h2>Manage Events</h2>

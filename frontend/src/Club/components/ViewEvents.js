@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const ViewEvents = () => {
-  // State variables
   const [events, setEvents] = useState([]);
   const [editingEvent, setEditingEvent] = useState(null);
   const [formData, setFormData] = useState({
@@ -12,99 +11,35 @@ const ViewEvents = () => {
     date: "",
     organizer: "",
   });
-  
-  // Fetch all events
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch events
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:5000/events");
+        const response = await fetch("http://localhost:5000/api/events");
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
-        return response.json();
-      })
-      .then((data) => {
-        setEvents(data.data.events || []); // Adjust based on backend response
-        setLoading(false);
-      })
-      .catch((err) => {
+        const data = await response.json();
+        setEvents(data.data.events || []);
+      } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchEvents();
   }, []);
 
-  // Handle input change for the form
+  // Input handler
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Start editing an event
-  const handleEdit = (event) => {
-    setEditingEvent(event._id);
-    setFormData({
-      eventName: event.eventName,
-      description: event.description,
-      campus: event.campus,
-      venue: event.venue,
-      date: event.date,
-      organizer: event.organizer,
-    });
-  };
-
-  // Update an event
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`http://localhost:5000/events/${editingEvent}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-    if (!response.ok) {
-      throw new Error("Failed to update event");
-    }
-
-    const updatedEvent = await response.json();
-    alert("Event updated successfully!");
-
-    // Update the event in the local state
-    setEvents((prev) =>
-      prev.map((event) => (event._id === editingEvent ? updatedEvent : event))
-    );
-
-    resetForm();
-  } catch (err) {
-    console.error("Error updating event:", err);
-    alert("Failed to update event.");
-  }
-};
-
-  // Delete an event
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this event?")) {
-      try {
-        const response = await fetch(`http://localhost:5000/api/events/${id}`, {
-          method: "DELETE",
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to delete event");
-        }
-
-        alert("Event deleted successfully!");
-        setEvents((prev) => prev.filter((event) => event._id !== id));
-      } catch (err) {
-        console.error("Error deleting event:", err);
-        alert("Failed to delete event.");
-      }
-    }
-  };
-
-  // Reset the form
+  // Reset form
   const resetForm = () => {
     setEditingEvent(null);
     setFormData({
@@ -117,21 +52,76 @@ const ViewEvents = () => {
     });
   };
 
-  // Render loading or error messages
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // Edit event
+  const handleEdit = (event) => {
+    setEditingEvent(event._id);
+    setFormData({
+      eventName: event.eventName,
+      description: event.description,
+      campus: event.campus,
+      venue: event.venue,
+      date: event.date.slice(0, 10),
+      organizer: event.organizer,
+    });
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // Update event
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/events/${editingEvent}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update event");
+      }
+      const updatedEvent = await response.json();
+      alert("Event updated successfully!");
+      setEvents((prev) =>
+        prev.map((event) =>
+            event._id === editingEvent ? updatedEvent.event : event
+        )
+    );
+      resetForm();
+    } catch (err) {
+      alert("Failed to update event.");
+    }
+  };
 
-  // Main render
+  // Delete event
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/events/${id}`,
+          { method: "DELETE" }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to delete event");
+        }
+        alert("Event deleted successfully!");
+        setEvents((prev) => prev.filter((event) => event._id !== id));
+      } catch (err) {
+        alert("Failed to delete event.");
+      }
+    }
+  };
+
+  // Loading or error states
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  // Render
   return (
     <div className="manage-events">
       <h2>Manage Events</h2>
       {editingEvent ? (
-        <form className="edit-form" onSubmit={handleUpdate}>
+        <form onSubmit={handleUpdate}>
           <h3>Edit Event</h3>
           <input
             type="text"
@@ -179,7 +169,7 @@ const ViewEvents = () => {
             placeholder="Organizer"
             required
           />
-          <button type="submit">Update Event</button>
+          <button type="submit">Update</button>
           <button type="button" onClick={resetForm}>
             Cancel
           </button>

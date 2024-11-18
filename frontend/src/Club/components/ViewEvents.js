@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-
 const ViewEvents = () => {
+  // State variables
   const [events, setEvents] = useState([]);
   const [editingEvent, setEditingEvent] = useState(null);
   const [formData, setFormData] = useState({
@@ -12,27 +12,32 @@ const ViewEvents = () => {
     date: "",
     organizer: "",
   });
-  
-  // Fetch all events
+  const [loading, setLoading] = useState(true); // To track loading state
+  const [error, setError] = useState(null);     // To track error state
+
+  // Fetch events from backend
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/events");
+    fetch("http://localhost:5000/api/events")
+      .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
-        const data = await response.json();
-        setEvents(data);
-      } catch (err) {
-        console.error("Error fetching events:", err);
-      }
-    };
-    fetchEvents();
+        return response.json();
+      })
+      .then((data) => {
+        setEvents(data.data.events || []); // Adjust based on backend response
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
-  // Handle input change for the form
+  // Input change handler
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // Start editing an event
@@ -43,7 +48,7 @@ const ViewEvents = () => {
       description: event.description,
       campus: event.campus,
       venue: event.venue,
-      date: event.date,
+      date: event.date.slice(0, 10), // Format date for input field
       organizer: event.organizer,
     });
   };
@@ -52,7 +57,7 @@ const ViewEvents = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/events/${editingEvent}`, {
+      const response = await fetch(`http://localhost:5000/api/events/${editingEvent}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +95,7 @@ const ViewEvents = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        const response = await fetch(`http://localhost:5000/events/${id}`, {
+        const response = await fetch(`http://localhost:5000/api/events/${id}`, {
           method: "DELETE",
         });
 
@@ -107,6 +112,16 @@ const ViewEvents = () => {
     }
   };
 
+  // Render loading or error messages
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // Main render
   return (
     <div className="manage-events">
       <h2>Manage Events</h2>

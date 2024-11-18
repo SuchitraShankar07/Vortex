@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 const ViewEvents = () => {
   // State variables
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [events, setEvents] = useState([]);
   const [editingEvent, setEditingEvent] = useState(null);
   const [formData, setFormData] = useState({
@@ -13,7 +16,6 @@ const ViewEvents = () => {
     organizer: "",
   });
   
-  // Fetch all events
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -21,18 +23,17 @@ const ViewEvents = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
-        return response.json();
-      })
-      .then((data) => {
-        setEvents(data.data.events || []); // Adjust based on backend response
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+        const data = await response.json();
+        setEvents(data);
+      } catch (error) {
+        console.error(error); // Log the error for debugging
+        setError("Failed to fetch events");
+      }
+    };
+  
+    fetchEvents();
   }, []);
-
+  
   // Handle input change for the form
   const handleInputChange = (e) => {
     const { name, value } = e.target;

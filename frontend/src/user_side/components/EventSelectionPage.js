@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import EventDetailsModal from './EventDetailsModel.js'; // Import the modal component
 
 function EventSelectionPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null); // State to store the selected event
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
 
   useEffect(() => {
-    // Fetch events from the backend
     fetch('http://localhost:5000/api/events')
       .then((response) => {
         if (!response.ok) {
@@ -24,6 +26,16 @@ function EventSelectionPage() {
         setLoading(false);
       });
   }, []);
+
+  const openModal = (event) => {
+    setSelectedEvent(event); // Set the selected event
+    setIsModalOpen(true); // Open the modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Close the modal
+    setSelectedEvent(null); // Clear the selected event
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -54,32 +66,30 @@ function EventSelectionPage() {
           >
             <h3>{event.eventName}</h3>
             <p>{event.description}</p>
-            <Link to={`/event/${event._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <button
-                style={{
-                  backgroundColor: '#00aced',
-                  color: '#ffffff',
-                  padding: '12px 20px',
-                  borderRadius: '5px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'transform 0.3s ease, background-color 0.3s ease',
-                  fontSize: '1.1rem',
-                }}
-                className='register-button'
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'scale(1.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'scale(1)';
-                }}
-              >
-                Register
-              </button>
-            </Link>
+            <button
+              style={{
+                backgroundColor: '#00aced',
+                color: '#ffffff',
+                padding: '12px 20px',
+                borderRadius: '5px',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease, background-color 0.3s ease',
+                fontSize: '1.1rem',
+              }}
+              className='register-button'
+              onClick={() => openModal(event)} // Open modal on button click
+            >
+              Register
+            </button>
           </div>
         ))}
       </div>
+
+      {/* Render the modal if it's open */}
+      {isModalOpen && selectedEvent && (
+        <EventDetailsModal event={selectedEvent} onClose={closeModal} />
+      )}
     </div>
   );
 }

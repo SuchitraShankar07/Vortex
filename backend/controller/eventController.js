@@ -1,65 +1,83 @@
-
 const Event = require("../model/eventSchema");
 const mongoose = require("mongoose");
 
-exports.getAllEvents = (req, res) => {
-    Event.find((err, data) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(data);
-    });
+exports.getAllEvents = async (req, res) => {
+  try {
+    const events = await Event.find();
+    res.status(200).json(events);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-exports.getEventById = (req, res) => {
-    Event.findById(mongoose.Types.ObjectId(req.params.id), (err, data) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(data);
-    });
+exports.getEventById = async (req, res) => {
+  try {
+    const event = await Event.findById(mongoose.Types.ObjectId(req.params.id));
+    if (!event) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+    res.json(event);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 exports.createEvent = async (req, res) => {
-    try {
-        const { eventName, description, campus, venue, date, organizer } = req.body;
-    
-        // Validate required fields
-        if (!eventName || !description || !campus || !venue || !date || !organizer) {
-          return res.status(400).json({ error: "All fields are required" });
-        }
-    
-        // Create and save the new event
-        const newEvent = new Event({
-          eventName,
-          description,
-          campus,
-          venue,
-          date,
-          organizer,
-        });
-    
-        await newEvent.save();
-    
-        res.status(201).json({ message: "Event created successfully", event: newEvent });
-      } catch (err) {
-        console.error("Error creating event:", err);
-        res.status(500).json({ error: "Server error" });
-      }
+  try {
+    const { eventName, description, campus, venue, date, organizer } = req.body;
+
+    // Validate required fields
+    if (!eventName || !description || !campus || !venue || !date || !organizer) {
+      return res.status(400).json({ error: "All fields are required" });
     }
 
+    // Create and save the new event
+    const newEvent = new Event({
+      eventName,
+      description,
+      campus,
+      venue,
+      date,
+      organizer,
+    });
 
-exports.updateEventById = (req, res) => {
-    Event.findByIdAndUpdate(
-        mongoose.Types.ObjectId(req.params.id),
-        { $set: req.body },
-        { new: true },
-        (err, data) => {
-            if (err) return res.status(500).json({ error: err.message });
-            res.json(data);
-        }
-    );
+    await newEvent.save();
+
+    res.status(201).json({ message: "Event created successfully", event: newEvent });
+  } catch (error) {
+    console.error("Error creating event:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 };
 
-exports.deleteEventById = (req, res) => {
-    Event.findByIdAndRemove(mongoose.Types.ObjectId(req.params.id), (err, data) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ message: "Event deleted successfully", data });
-    });
+exports.updateEventById = async (req, res) => {
+  try {
+    const updatedEvent = await Event.findByIdAndUpdate(
+      mongoose.Types.ObjectId(req.params.id),
+      { $set: req.body },
+      { new: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+
+    res.json(updatedEvent);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.deleteEventById = async (req, res) => {
+  try {
+    const deletedEvent = await Event.findByIdAndRemove(mongoose.Types.ObjectId(req.params.id));
+
+    if (!deletedEvent) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+
+    res.json({ message: "Event deleted successfully", data: deletedEvent });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };

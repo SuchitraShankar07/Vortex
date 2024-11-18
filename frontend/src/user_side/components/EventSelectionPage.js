@@ -11,25 +11,21 @@ function EventSelectionPage() {
 
   // Fetch events when the component mounts
   useEffect(() => {
-    fetch('http://localhost:5000/api/events')
-      .then((response) => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/events");
         if (!response.ok) {
-          throw new Error('Failed to fetch events');
+          throw new Error("Failed to fetch events");
         }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Fetched events:', data); // Log the response to check the structure
-        // Ensure that 'data' is an array, or extract the array from a different key (e.g., 'data.events')
-        const eventsArray = Array.isArray(data) ? data : Array.isArray(data.events) ? data.events : [];
-        console.log('Final events array:', eventsArray); // Log final events array
-        setEvents(eventsArray);
-        setLoading(false);
-      })
-      .catch((err) => {
+        const data = await response.json();
+        setEvents(data.data.events || []);
+      } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchEvents();
   }, []);
 
   const openModal = (event) => {

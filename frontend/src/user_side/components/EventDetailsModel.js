@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import cashRegisterSound from './cash-register-kaching-sound-effect-125042.mp3'; // Import the audio file
 
 function EventDetailsModal({ event, onClose }) {
   const [isRegistered, setIsRegistered] = useState(false);
 
   // Function to handle the "Attend Event" button click
   const handleAttendClick = () => {
-    // Play sound when the button is clicked
-    const audio = new Audio('https://www.soundjay.com/button/beep-07.wav'); // URL of the beep sound
-    audio.play();
+    const audio = new Audio(cashRegisterSound); // Use the imported audio file
+    audio.play(); // Play the sound
 
     // Set the "Registered" text on the screen
     setIsRegistered(true);

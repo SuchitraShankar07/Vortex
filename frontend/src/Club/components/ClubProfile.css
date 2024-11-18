@@ -1,38 +1,37 @@
-/* Container for the club profile page */
+
 .club-profile {
   padding: 30px;
-  background: linear-gradient(135deg, #f0f8ff, #d4edff); /* Subtle gradient */
+  background: linear-gradient(135deg, #f0f8ff, #d4edff); 
   max-width: 1000px;
   margin: 0 auto;
   margin-top: 50px;
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); 
   color: #014463;
 }
 
-/* Scoped headings */
 .club-profile h2 {
   font-size: 3rem;
   text-align: center;
-  color: #016d88; /* Vibrant dark text */
+  color: #016d88; 
   margin-bottom: 25px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Scoped profile form styling */
+
 .profile-form {
   display: flex;
-  flex-wrap: wrap; /* Allows items to wrap into rows instead of stacking vertically */
+  flex-wrap: wrap; 
   gap: 20px;
   justify-content: center;
 }
 
-/* Form group */
+
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%; /* Ensure each form group occupies the full width for horizontal display */
+  width: 100%; 
 }
 
 .form-group label {
@@ -60,7 +59,6 @@
   outline: none;
 }
 
-/* Submit button */
 .submit-btn {
   background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
@@ -93,7 +91,6 @@
   box-shadow: 0 0 12px rgba(52, 152, 219, 0.8);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .club-profile {
     padding: 20px;
@@ -101,7 +98,7 @@
 
   .profile-form {
     padding: 20px;
-    flex-direction: column; /* Stack vertically on smaller screens */
+    flex-direction: column; 
   }
 
   .submit-btn {

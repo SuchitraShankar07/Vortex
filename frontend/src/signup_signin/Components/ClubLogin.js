@@ -21,7 +21,8 @@ function ClubLogin() {
       const data = await response.json();
 
       if (response.ok) {
-        navigate('/club/dashboard'); // Redirect to club dashboard
+        localStorage.setItem('clubProfile', JSON.stringify(data.club));
+        navigate('/club/dashboard');
       } else {
         setError(data.message || 'Invalid credentials');
       }

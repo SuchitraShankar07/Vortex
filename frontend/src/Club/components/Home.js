@@ -7,18 +7,18 @@ import "slick-carousel/slick/slick-theme.css";
 import club1 from '../assets/club1.png';
 import club2 from '../assets/club2.png';
 import club3 from '../assets/club3.png';
-import club4 from '../assets/club4.png'; // If you want to add any specific styling to the home page
+import club4 from '../assets/club4.png'; 
 
 
 const Home = () => {
   const settings = {
-    dots: true,        // Show navigation dots
-    infinite: true,    // Infinite scroll
-    speed: 500,        // Speed of transition
-    slidesToShow: 1,   // Show one image at a time
-    slidesToScroll: 1, // Scroll one image at a time
-    autoplay: true,    // Enable autoplay
-    autoplaySpeed: 2000, // Time between transitions (in ms)
+    dots: true,       
+    infinite: true,    
+    speed: 500,        
+    slidesToShow: 1,   
+    slidesToScroll: 1, 
+    autoplay: true,   
+    autoplaySpeed: 1000, 
   };
 
  

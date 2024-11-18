@@ -24,7 +24,7 @@ class ContactPage extends Component {
     e.preventDefault();
     const errors = {};
 
-    // Validate inputs
+
     if (!this.state.name.trim()) {
       errors.name = "Name is required";
     }
@@ -44,7 +44,7 @@ class ContactPage extends Component {
         message: this.state.message,
       };
 
-      // Send feedback data to backend
+    
       fetch("http://localhost:5000/api/feedback", {
         method: "POST",
         headers: {
@@ -108,7 +108,7 @@ class ContactPage extends Component {
               </div>
             </div>
 
-            {/* Message Field */}
+           
             <div className="formGroup">
               <label htmlFor="message">Message</label>
               <textarea
@@ -122,14 +122,14 @@ class ContactPage extends Component {
               {this.state.errors.message && <span className="contact-error">{this.state.errors.message}</span>}
             </div>
 
-            {/* Submit Button */}
+            
             <button type="submit" className="contact-button">
               Submit
             </button>
           </form>
         </div>
 
-        {/* Feedback Section */}
+        
         <div className="feedback-container">
           <h2>User Feedback</h2>
           {this.state.feedback.length === 0 ? (

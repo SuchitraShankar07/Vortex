@@ -1,82 +1,71 @@
-/* Global reset for box-sizing */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Ensures padding/margin don't expand element width */
+  box-sizing: border-box;
 }
 
-/* Ensure body doesn't overflow horizontally */
 body {
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-
-/* General styles for the entire page */
-body {
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif; /* Changed cursive to a more standard font */
-  background-color: #000; /* Black background */
-  color: #fff; /* White text */
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
 }
 
-/* Navbar styles */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #000; /* Black background for navbar */
-  position: relative; /* Ensure positioning for toggle button */
+  background-color: #000;
+  position: relative;
 }
 
-/* Logo styles */
 .navbar-logo {
   display: flex;
   align-items: center;
 }
 
 .logo {
-  width: 40px;  /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Space between the logo and text */
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .navbar-logo h2 {
   margin: 0;
-  color: #fff; /* White font for the logo */
+  color: #fff;
   font-size: 1.5rem;
 }
 
-/* Navbar links styles */
 .nav-links {
   display: flex;
   gap: 1.5rem;
 }
 
 .nav-links a {
-  color: #fff; /* White font for links */
+  color: #fff;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border: 2px solid #40e0d0; /* Turquoise border */
-  border-radius: 25px; /* Rounded corners */
+  border: 2px solid #40e0d0;
+  border-radius: 25px;
   font-size: 1rem;
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .nav-links a:hover {
-  background-color: #40e0d0; /* Turquoise background on hover */
-  color: #000; /* Black text on hover */
+  background-color: #40e0d0;
+  color: #000;
 }
 
-/* Toggle button for mobile view */
 .nav-toggle {
   display: none;
   background: none;
   border: none;
   color: white;
   font-size: 2rem;
-  position: absolute; /* Position it on the right */
+  position: absolute;
   top: 1.5rem;
   right: 2rem;
   cursor: pointer;
@@ -84,24 +73,24 @@ body {
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none !important; /* Ensure it's hidden initially */
+    display: none !important;
     flex-direction: column;
     width: 100%;
     text-align: center;
-    background-color: #000; /* Ensure background color for dropdown */
+    background-color: #000;
     position: absolute;
     top: 5rem;
     left: 0;
     padding: 1rem 0;
-    transition: max-height 0.3s ease-in-out; /* Smooth transition for expanding */
+    transition: max-height 0.3s ease-in-out;
   }
 
   .nav-links.open {
-    display: flex !important; /* Ensure the menu shows when open */
+    display: flex !important;
   }
 
   .nav-links a {
-    padding: 1rem 0; /* Adjust padding for better spacing in mobile view */
+    padding: 1rem 0;
   }
 
   .nav-toggle {
@@ -120,13 +109,12 @@ body {
     position: absolute;
     top: 5rem;
     left: 0;
-    padding: 0; /* Remove padding when closed */
-    transition: max-height 0.3s ease-in-out; /* Smooth transition */
+    padding: 0;
+    transition: max-height 0.3s ease-in-out;
   }
 
   .nav-links.open {
-    max-height: 300px; /* Adjust to fit the total height of your links */
-    padding: 1rem 0; /* Add padding when open */
+    max-height: 300px;
+    padding: 1rem 0;
   }
 }
-

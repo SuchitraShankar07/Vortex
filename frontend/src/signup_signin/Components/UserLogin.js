@@ -37,6 +37,7 @@ function UserLogin() {
           const data = await response.json();
   
           if (response.ok) {
+            localStorage.setItem("userID", data.userID);
               navigate('/user/dashboard'); // Redirect to the user dashboard on success
           } else {
               setError(data.message || 'Invalid credentials.');

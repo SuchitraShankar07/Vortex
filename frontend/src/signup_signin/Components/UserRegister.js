@@ -63,6 +63,7 @@ function UserRegister() {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("userID", data.userID);
         setSuccess('Registration successful! Redirecting...');
         setTimeout(() => {
           setSuccess('');

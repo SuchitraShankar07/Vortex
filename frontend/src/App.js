@@ -17,6 +17,7 @@ import EventSelectionPage from './user_side/components/EventSelectionPage';
 import EventRegistration from './user_side/components/EventRegistration';
 import AttendancePage from './user_side/components/AttendancePage';
 import EventDetailsModal from './user_side/components/EventDetailsModel';
+import Details from './user_side/components/Details';
 const App = () => {
   const [events, setEvents] = useState([]);
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/attended-events" element={<AttendedEvents />} />
           <Route path="/EventDetailsModal" element={<EventDetailsModal />} />
+          <Route path="/details" element={<Details />} />
         </Routes>
       </Router>
     </div>

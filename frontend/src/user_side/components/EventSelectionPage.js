@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
 import EventDetailsModal from './EventDetailsModel.js'; // Import the modal component
 
 function EventSelectionPage() {

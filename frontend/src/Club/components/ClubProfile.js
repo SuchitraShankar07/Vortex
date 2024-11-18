@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import './ClubProfile.css';
 
 const ClubProfile = () => {
@@ -10,20 +10,20 @@ const ClubProfile = () => {
       domain: '',
       campus: 'RR', // Default to RR
     });
-  
+
     const handleChange = (e) => {
       setProfile({
         ...profile,
         [e.target.name]: e.target.value,
       });
     };
-  
+
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log('Club Profile:', profile);
       // You can handle the form submission (e.g., save data to a database)
     };
-  
+
     return (
       <div className="club-profile">
         <h2>Club Profile</h2>
@@ -39,7 +39,7 @@ const ClubProfile = () => {
               required
             />
           </div>
-  
+
           <div className="form-group">
             <label htmlFor="headName">Head's Name</label>
             <input
@@ -51,7 +51,7 @@ const ClubProfile = () => {
               required
             />
           </div>
-  
+
           <div className="form-group">
             <label htmlFor="email">Email ID</label>
             <input
@@ -63,7 +63,7 @@ const ClubProfile = () => {
               required
             />
           </div>
-  
+
           <div className="form-group">
             <label htmlFor="instagram">Instagram Handle</label>
             <input
@@ -74,7 +74,7 @@ const ClubProfile = () => {
               placeholder="Enter Instagram handle"
             />
           </div>
-  
+
           <div className="form-group">
             <label htmlFor="domain">Club Domain</label>
             <input
@@ -85,7 +85,7 @@ const ClubProfile = () => {
               placeholder="E.g., Technical, Cultural, Sports"
             />
           </div>
-  
+
           <div className="form-group">
             <label htmlFor="campus">Campus</label>
             <select
@@ -98,12 +98,11 @@ const ClubProfile = () => {
               <option value="Ecity">Ecity Campus</option>
             </select>
           </div>
-  
+
           <button type="submit" className="submit-btn">Submit</button>
         </form>
       </div>
     );
   };
-  
+
   export default ClubProfile;
-  

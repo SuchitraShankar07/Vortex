@@ -1,6 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
 import './home.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import club1 from '../assets/club1.png';
 import club2 from '../assets/club2.png';
 import club3 from '../assets/club3.png';

@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-
-import './ContactUs.css'; 
+import React, { Component } from "react";
+import "./ContactUs.css";
 
 class ContactPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      message: '',
+      name: "",
+      email: "",
+      message: "",
       feedback: [],
-      errors: {}, 
+      errors: {},
     };
   }
 
@@ -24,17 +23,18 @@ class ContactPage extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const errors = {};
-    
+
+    // Validate inputs
     if (!this.state.name.trim()) {
-      errors.name = 'Name is required';
+      errors.name = "Name is required";
     }
     if (!this.state.email.trim()) {
-      errors.email = 'Email is required';
+      errors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.state.email)) {
-      errors.email = 'Invalid email format';
+      errors.email = "Invalid email format";
     }
     if (!this.state.message.trim()) {
-      errors.message = 'Message is required';
+      errors.message = "Message is required";
     }
 
     if (Object.keys(errors).length === 0) {
@@ -44,7 +44,7 @@ class ContactPage extends Component {
         message: this.state.message,
       };
 
-      // Using fetch instead of Axios
+      // Send feedback data to backend
       fetch("http://localhost:5000/api/feedback", {
         method: "POST",
         headers: {
@@ -52,99 +52,92 @@ class ContactPage extends Component {
         },
         body: JSON.stringify(newFeedback),
       })
-      .then((response) => {
-        if (response.ok) {
-          alert("Thank you for your feedback!");
-          this.setState((prevState) => ({
-            feedback: [...prevState.feedback, newFeedback],
-            errors: {},
-            name: '',
-            email: '',
-            message: '',
-          }));
-        } else {
-          return Promise.reject("Failed to submit feedback.");
-        }
-      })
-      .catch((err) => {
-        alert(err);
-      });
-      
+        .then((response) => {
+          if (response.ok) {
+            alert("Thank you for your feedback!");
+            this.setState((prevState) => ({
+              feedback: [...prevState.feedback, { ...newFeedback, posted: true }],
+              errors: {},
+              name: "",
+              email: "",
+              message: "",
+            }));
+          } else {
+            return Promise.reject("Failed to submit feedback.");
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
     } else {
-      // Set errors
-      this.setState({
-        errors,
-      });
+      this.setState({ errors });
     }
   };
 
   render() {
     return (
-      <div className="contact-container">
-        <h1>Contact Us</h1>
-        <form onSubmit={this.handleSubmit} className="contact-form">
-          {/* Contact form */}
-          <div className="formGroup">
-            <label htmlFor="name" className="contact-label">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-              className="contact-input"
-            />
-            {this.state.errors && this.state.errors.name && (
-              <span className="contact-error">{this.state.errors.name}</span>
-            )}
-          </div>
-          <div className="formGroup">
-            <label htmlFor="email" className="contact-label">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-              className="contact-input"
-            />
-            {this.state.errors && this.state.errors.email && (
-              <span className="contact-error">{this.state.errors.email}</span>
-            )}
-          </div>
-          <div className="formGroup">
-            <label htmlFor="message" className="contact-label">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={this.state.message}
-              onChange={this.handleInputChange}
-              className="contact-input"
-            />
-            {this.state.errors && this.state.errors.message && (
-              <span className="contact-error">{this.state.errors.message}</span>
-            )}
-          </div>
-          <button type="submit" className="contact-button">
-            Submit
-          </button>
-        </form>
+      <div className="contact-wrapper">
+        <div className="contact-container">
+          <h1>Contact Us</h1>
+          <form onSubmit={this.handleSubmit} className="contact-form">
+            {/* Horizontal Form Layout */}
+            <div className="contact-row">
+              <div className="formGroup">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleInputChange}
+                  className="contact-input"
+                />
+                {this.state.errors.name && <span className="contact-error">{this.state.errors.name}</span>}
+              </div>
+              <div className="formGroup">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                  className="contact-input"
+                />
+                {this.state.errors.email && <span className="contact-error">{this.state.errors.email}</span>}
+              </div>
+            </div>
 
-        {/* Feedback section */}
-        <div>
+            {/* Message Field */}
+            <div className="formGroup">
+              <label htmlFor="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                value={this.state.message}
+                onChange={this.handleInputChange}
+                className="contact-input"
+                rows="4"
+              />
+              {this.state.errors.message && <span className="contact-error">{this.state.errors.message}</span>}
+            </div>
+
+            {/* Submit Button */}
+            <button type="submit" className="contact-button">
+              Submit
+            </button>
+          </form>
+        </div>
+
+        {/* Feedback Section */}
+        <div className="feedback-container">
           <h2>User Feedback</h2>
           {this.state.feedback.length === 0 ? (
             <p>No feedback yet.</p>
           ) : (
             <ul className="feedbackList">
               {this.state.feedback.map((entry, index) => (
-                <li key={index} className="feedbackItem">
+                <li key={index} className={`feedbackItem ${entry.posted ? "posted" : ""}`}>
                   <strong>Name:</strong> {entry.name}
                   <br />
                   <strong>Email:</strong> {entry.email}

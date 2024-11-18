@@ -1,3 +1,16 @@
+/* Global reset for box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding/margin don't expand element width */
+}
+
+/* Ensure body doesn't overflow horizontally */
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+
 /* General styles for the entire page */
 body {
   margin: 0;
@@ -69,15 +82,14 @@ body {
   cursor: pointer;
 }
 
-/* Mobile view: Hide links, show toggle */
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
+    display: none !important; /* Ensure it's hidden initially */
     flex-direction: column;
     width: 100%;
     text-align: center;
     background-color: #000; /* Ensure background color for dropdown */
-    position: absolute; /* Position it below the navbar */
+    position: absolute;
     top: 5rem;
     left: 0;
     padding: 1rem 0;
@@ -85,7 +97,7 @@ body {
   }
 
   .nav-links.open {
-    display: flex;
+    display: flex !important; /* Ensure the menu shows when open */
   }
 
   .nav-links a {
@@ -96,3 +108,25 @@ body {
     display: block;
   }
 }
+
+@media (max-width: 768px) {
+  .nav-links {
+    max-height: 0;
+    overflow: hidden;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background-color: #000;
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    padding: 0; /* Remove padding when closed */
+    transition: max-height 0.3s ease-in-out; /* Smooth transition */
+  }
+
+  .nav-links.open {
+    max-height: 300px; /* Adjust to fit the total height of your links */
+    padding: 1rem 0; /* Add padding when open */
+  }
+}
+

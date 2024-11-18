@@ -4,7 +4,7 @@ const User = require("../model/userSchema");
 const Event = require("../model/eventSchema");
 const Attendance = require("../model/attendanceSchema");
 const QRCode = require("qrcode");
-
+ 
 exports.attendedEvents = async( req, res) =>{
     try{
         const user = await User.findById(req.user.id);

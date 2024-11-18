@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 const ViewEvents = () => {
   const [events, setEvents] = useState([]);
   const [editingEvent, setEditingEvent] = useState(null);
@@ -12,12 +11,12 @@ const ViewEvents = () => {
     date: "",
     organizer: "",
   });
-  
+
   // Fetch all events
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:5000/events");
+        const response = await fetch("http://localhost:5000/api/events");
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
@@ -30,9 +29,10 @@ const ViewEvents = () => {
     fetchEvents();
   }, []);
 
-  // Handle input change for the form
+  // Handle input changes
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // Start editing an event
@@ -43,54 +43,50 @@ const ViewEvents = () => {
       description: event.description,
       campus: event.campus,
       venue: event.venue,
-      date: event.date,
+      date: event.date.slice(0, 10), // Adjust date for input format
       organizer: event.organizer,
     });
   };
+// Update an event
+const handleUpdate = async (e) => {
+  e.preventDefault();
 
-  // Update an event
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`http://localhost:5000/events/${editingEvent}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+  try {
+  
+   
 
-      if (!response.ok) {
-        throw new Error("Failed to update event");
-      }
+    const response = await fetch(`http://localhost:5000/api/events/${editingEvent}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      const updatedEvent = await response.json();
-      alert("Event updated successfully!");
-      setEvents((prev) =>
-        prev.map((event) =>
-          event._id === editingEvent ? { ...event, ...updatedEvent } : event
-        )
-      );
-      setEditingEvent(null);
-      setFormData({
-        eventName: "",
-        description: "",
-        campus: "",
-        venue: "",
-        date: "",
-        organizer: "",
-      });
-    } catch (err) {
-      console.error("Error updating event:", err);
-      alert("Failed to update event.");
+    if (!response.ok) {
+      throw new Error("Failed to update event");
     }
-  };
+
+    const updatedEvent = await response.json();
+    alert("Event updated successfully!");
+
+    // Update the event in the local state
+    setEvents((prev) =>
+      prev.map((event) => (event._id === editingEvent ? updatedEvent : event))
+    );
+
+    resetForm();
+  } catch (err) {
+    console.error("Error updating event:", err);
+    alert("Failed to update event.");
+  }
+};
 
   // Delete an event
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        const response = await fetch(`http://localhost:5000/events/${id}`, {
+        const response = await fetch(`http://localhost:5000/api/events/${id}`, {
           method: "DELETE",
         });
 
@@ -105,6 +101,19 @@ const ViewEvents = () => {
         alert("Failed to delete event.");
       }
     }
+  };
+
+  // Reset the form
+  const resetForm = () => {
+    setEditingEvent(null);
+    setFormData({
+      eventName: "",
+      description: "",
+      campus: "",
+      venue: "",
+      date: "",
+      organizer: "",
+    });
   };
 
   return (
@@ -160,7 +169,7 @@ const ViewEvents = () => {
             required
           />
           <button type="submit">Update Event</button>
-          <button type="button" onClick={() => setEditingEvent(null)}>
+          <button type="button" onClick={resetForm}>
             Cancel
           </button>
         </form>

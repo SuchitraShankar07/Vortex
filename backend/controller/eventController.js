@@ -12,6 +12,7 @@ exports.getAllEvents = async (req, res) => {
 
 exports.getEventById = async (req, res) => {
   try {
+    console.log("here lies the issue")
     const event = await Event.findById(mongoose.Types.ObjectId(req.params.id));
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
@@ -52,6 +53,7 @@ exports.createEvent = async (req, res) => {
 
 exports.updateEventById = async (req, res) => {
   try {
+    console.log("test1")
     const updatedEvent = await Event.findByIdAndUpdate(
       mongoose.Types.ObjectId(req.params.id),
       { $set: req.body },
@@ -59,12 +61,15 @@ exports.updateEventById = async (req, res) => {
     );
 
     if (!updatedEvent) {
+        console.log("test2")
       return res.status(404).json({ error: "Event not found" });
     }
+    console.log("test3")
 
     res.json(updatedEvent);
   } catch (error) {
     res.status(500).json({ error: error.message });
+    console.log("test4")
   }
 };
 

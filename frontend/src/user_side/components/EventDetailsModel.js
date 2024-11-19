@@ -31,7 +31,7 @@ function EventDetailsModal({ event, onClose }) {
           </button>
         ) : (
           <p style={registeredTextStyles}>Registered</p> 
-          <p style={registeredTextStyles}>Registered</p> 
+
         )}
 
         <button onClick={onClose} style={closeButtonStyles}>Close</button>
@@ -64,8 +64,8 @@ const modalContentStyles = {
 
 const closeButtonStyles = {
   position: 'absolute',
-  top: '10px',
-  right: '10px',
+  top: '190px',
+  right:'8px',
   backgroundColor: 'red',
   color: 'black',
   border: 'none',

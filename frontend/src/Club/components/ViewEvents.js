@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar"; // Import Navbar component
+import "./ViewEvents.css"; // Assume a CSS file exists for styling
 
 const ViewEvents = () => {
   const [events, setEvents] = useState([]);
@@ -84,9 +86,9 @@ const ViewEvents = () => {
       alert("Event updated successfully!");
       setEvents((prev) =>
         prev.map((event) =>
-            event._id === editingEvent ? updatedEvent.event : event
+          event._id === editingEvent ? updatedEvent.event : event
         )
-    );
+      );
       resetForm();
     } catch (err) {
       alert("Failed to update event.");
@@ -118,86 +120,89 @@ const ViewEvents = () => {
 
   // Render
   return (
-    <div className="manage-events">
-      <h2>Manage Events</h2>
-      {editingEvent ? (
-        <form onSubmit={handleUpdate}>
-          <h3>Edit Event</h3>
-          <input
-            type="text"
-            name="eventName"
-            value={formData.eventName}
-            onChange={handleInputChange}
-            placeholder="Event Name"
-            required
-          />
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            placeholder="Description"
-            required
-          />
-          <input
-            type="text"
-            name="campus"
-            value={formData.campus}
-            onChange={handleInputChange}
-            placeholder="Campus"
-            required
-          />
-          <input
-            type="text"
-            name="venue"
-            value={formData.venue}
-            onChange={handleInputChange}
-            placeholder="Venue"
-            required
-          />
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="text"
-            name="organizer"
-            value={formData.organizer}
-            onChange={handleInputChange}
-            placeholder="Organizer"
-            required
-          />
-          <button type="submit">Update</button>
-          <button type="button" onClick={resetForm}>
-            Cancel
-          </button>
-        </form>
-      ) : (
-        <div className="event-list">
-          {events.map((event) => (
-            <div key={event._id} className="event-card">
-              <h3>{event.eventName}</h3>
-              <p>{event.description}</p>
-              <p>
-                <strong>Campus:</strong> {event.campus}
-              </p>
-              <p>
-                <strong>Venue:</strong> {event.venue}
-              </p>
-              <p>
-                <strong>Date:</strong> {new Date(event.date).toDateString()}
-              </p>
-              <p>
-                <strong>Organizer:</strong> {event.organizer}
-              </p>
-              <button onClick={() => handleEdit(event)}>Edit</button>
-              <button onClick={() => handleDelete(event._id)}>Delete</button>
-            </div>
-          ))}
-        </div>
-      )}
+    <div>
+      <Navbar /> {/* Include the Navbar */}
+      <div className="manage-events">
+        <h2>Manage Events</h2>
+        {editingEvent ? (
+          <form onSubmit={handleUpdate}>
+            <h3>Edit Event</h3>
+            <input
+              type="text"
+              name="eventName"
+              value={formData.eventName}
+              onChange={handleInputChange}
+              placeholder="Event Name"
+              required
+            />
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              placeholder="Description"
+              required
+            />
+            <input
+              type="text"
+              name="campus"
+              value={formData.campus}
+              onChange={handleInputChange}
+              placeholder="Campus"
+              required
+            />
+            <input
+              type="text"
+              name="venue"
+              value={formData.venue}
+              onChange={handleInputChange}
+              placeholder="Venue"
+              required
+            />
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="organizer"
+              value={formData.organizer}
+              onChange={handleInputChange}
+              placeholder="Organizer"
+              required
+            />
+            <button type="submit">Update</button>
+            <button type="button" onClick={resetForm}>
+              Cancel
+            </button>
+          </form>
+        ) : (
+          <div className="event-list">
+            {events.map((event) => (
+              <div key={event._id} className="event-card">
+                <h3>{event.eventName}</h3>
+                <p>{event.description}</p>
+                <p>
+                  <strong>Campus:</strong> {event.campus}
+                </p>
+                <p>
+                  <strong>Venue:</strong> {event.venue}
+                </p>
+                <p>
+                  <strong>Date:</strong> {new Date(event.date).toDateString()}
+                </p>
+                <p>
+                  <strong>Organizer:</strong> {event.organizer}
+                </p>
+                <button onClick={() => handleEdit(event)}>Edit</button>
+                <button onClick={() => handleDelete(event._id)}>Delete</button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

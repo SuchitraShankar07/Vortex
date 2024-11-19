@@ -1,19 +1,8 @@
 
-
-
-.navbar {
-  position: sticky; 
-  position: sticky; 
-  top: 0;
-  z-index: 1000; 
-  z-index: 1000; 
-  width: 100%;
+.navbar1 {
   background-color: #121212; 
   background-color: #121212; 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
+  max-height: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   animation: fadeIn 2s ease-in-out;
 }

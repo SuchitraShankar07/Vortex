@@ -1,37 +1,34 @@
-
 .club-profile {
   padding: 30px;
-  background: linear-gradient(135deg, #f0f8ff, #d4edff); 
+  background: linear-gradient(135deg, #f0f8ff, #d4edff);
   max-width: 1000px;
-  margin: 0 auto;
-  margin-top: 50px;
+  margin: 50px auto;
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
   color: #014463;
 }
 
 .club-profile h2 {
   font-size: 3rem;
   text-align: center;
-  color: #016d88; 
+  color: #016d88;
   margin-bottom: 25px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .profile-form {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
-
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%; 
+  width: 100%; /* Adjusted for better responsiveness */
+  max-width: 400px; /* Ensures input fields aren't too wide */
 }
 
 .form-group label {
@@ -59,7 +56,8 @@
   outline: none;
 }
 
-.submit-btn {
+.submit-btn,
+.logout-btn {
   background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
   border: none;
@@ -77,20 +75,28 @@
   display: block;
 }
 
-.submit-btn:hover {
-  background: linear-gradient(135deg, #3baeea, #217cbf);
-  transform: scale(1.05) translateY(-4px);
+.submit-btn:hover,
+.logout-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 30px rgba(52, 152, 219, 0.4);
 }
 
-.submit-btn:active {
-  transform: scale(0.95) translateY(2px);
+.submit-btn:active,
+.logout-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
 }
 
-.submit-btn:focus {
-  outline: none;
-  box-shadow: 0 0 12px rgba(52, 152, 219, 0.8);
+.logout-btn {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
+.logout-btn:hover {
+  background: linear-gradient(135deg, #ff6f61, #d35445);
+}
+
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
   .club-profile {
     padding: 20px;
@@ -98,11 +104,19 @@
 
   .profile-form {
     padding: 20px;
-    flex-direction: column; 
+    flex-direction: column;
+    align-items: center; /* Center form inputs */
   }
 
-  .submit-btn {
-    width: 100%;
+  .form-group {
+    width: 100%; /* Full width for small screens */
+    max-width: none;
+  }
+
+  .submit-btn,
+  .logout-btn {
+    width: 100%; /* Buttons take full width */
+    margin: 10px 0;
   }
 
   .club-profile h2 {

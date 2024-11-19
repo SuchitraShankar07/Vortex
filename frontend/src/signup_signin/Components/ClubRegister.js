@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-
+import './Register.css'
 function ClubRegister() {
   const [clubName, setClubName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ function ClubRegister() {
       const response = await fetch('http://localhost:5000/api/club/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clubName, email, phone, password }),  // Send phone number in the request
+        body: JSON.stringify({ clubName, email, phone, password }), 
       });
       const data = await response.json();
 
@@ -40,11 +40,13 @@ function ClubRegister() {
   };
 
   return (
+    <div className="center-container">
     <motion.div
       className="form-card"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      
     >
       <h2>Club Register</h2>
       <p>Fill in your details to register.</p>
@@ -97,14 +99,16 @@ function ClubRegister() {
       </form>
       <p>
         Already have an account?{' '}
-        <span
+        <motion.span
           className="link"
           onClick={() => navigate('/')}
+          whileHover={{ textDecoration: "underline", cursor: "pointer" }}
         >
           Login
-        </span>
+        </motion.span>
       </p>
     </motion.div>
+    </div>
   );
 }
 

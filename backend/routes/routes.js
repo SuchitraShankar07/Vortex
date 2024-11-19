@@ -16,7 +16,7 @@ router
     .put(authenticate, userController.updateUserById)
     .delete(authenticate, userController.deleteUserById);
 
-// Event Interaction
+
 router.get("/user/attended-events", authenticate, userController.attendedEvents);
 router.post("/user/book-event/:eventId", authenticate, userController.bookEvent);
 router.get("/user/generate-qr/:eventId", authenticate, userController.generateQR);

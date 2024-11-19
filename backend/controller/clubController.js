@@ -45,11 +45,11 @@ exports.registerClub = async (req, res) => {
                 message: "Login successful!",
                 club: {
                     clubName: club.clubName,
-                    headName: club.headName || '',  // Adjust according to your schema
+                    headName: club.headName || '',  
                     email: club.email,
-                    instagram: club.instagram || '', // Adjust according to your schema
-                    domain: club.domain || '',       // Adjust according to your schema
-                    campus: club.campus || 'Ecity'   // Adjust according to your schema
+                    // instagram: club.instagram || '',
+                    domain: club.domain || '',      
+                    campus: club.campus || 'Ecity'  
                 }
             });
         } catch (err) {
@@ -72,7 +72,6 @@ exports.createEvent = async (req, res) => {
 
 
 
-// Mark attendance for a user
 exports.markAttendance = async (req, res) => {
   try {
     const { eventId, userId } = req.body;
@@ -98,7 +97,6 @@ exports.markAttendance = async (req, res) => {
   }
 };
 
-// Get attendance for a specific event
 exports.getAttendanceForEvent = async (req, res) => {
   try {
     const { eventId } = req.params;
@@ -112,7 +110,6 @@ exports.getAttendanceForEvent = async (req, res) => {
   }
 };
 
-// Get all attendance records
 exports.getAllAttendanceRecords = async (req, res) => {
   try {
     const attendanceRecords = await Attendance.find();

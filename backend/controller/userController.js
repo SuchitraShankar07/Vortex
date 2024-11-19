@@ -1,5 +1,5 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
 const Event = require("../model/eventSchema");
 const Attendance = require("../model/attendanceSchema");
@@ -36,7 +36,7 @@ exports.registerUser = async (req, res) => {
     }
 
     try {
-        // Store SRN in lowercase
+    
         const newUser = await User.create({
             SRN: SRN.toLowerCase(),
             phone,

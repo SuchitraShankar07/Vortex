@@ -4,33 +4,33 @@ import ScanQR from "./ScanQR";
 import Navbar from "./Navbar";
 
 function AttendancePage() {
-  const [referenceNumber, setReferenceNumber] = useState("");
+  const [UserId, setUserId] = useState("");
   const [eventId, setEventId] = useState("");
   const [showQR, setShowQR] = useState(false);
 
   const handleGenerateQR = async () => {
-    if (referenceNumber.trim() === "" || eventId.trim() === "") {
+    if (UserId.trim() === "" || eventId.trim() === "") {
       alert("Please enter both Reference Number and Event ID.");
       return;
     }
 
-    // Make a POST request to mark attendance
+ 
     try {
-      const response = await fetch("http://localhost:5000/attendance/mark", {
+      const response = await fetch("http://localhost:5000/api/attendance/mark", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"},
         body: JSON.stringify({
           eventId,
-          userId: referenceNumber,
+          userId: UserId,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
         console.log("Attendance marked successfully:", data);
-        setShowQR(true); // Show QR code only after successful submission
+        alert("Attendance marked successfully");
+        setShowQR(true); 
       } else {
         const error = await response.json();
         alert(`Error: ${error.error}`);
@@ -62,9 +62,9 @@ function AttendancePage() {
           <input
             type="text"
             placeholder="Enter Reference Number"
-            value={referenceNumber}
+            value={UserId}
             onChange={(e) => {
-              setReferenceNumber(e.target.value);
+              setUserId(e.target.value);
               setShowQR(false);
             }}
             className="input-field"
@@ -115,7 +115,7 @@ function AttendancePage() {
           </button>
           {showQR && (
             <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-              <GenerateQR referenceNumber={referenceNumber} eventId={eventId} />
+              <GenerateQR referenceNumber={UserId} eventId={eventId} />
             </div>
           )}
         </div>

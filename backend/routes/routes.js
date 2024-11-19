@@ -2,8 +2,8 @@ const express = require("express");
 const userController = require("../controller/userController");
 const clubController = require("../controller/clubController");
 const eventController = require("../controller/eventController");
-const feedbackController = require("../controller/feedbackController");// Import attendance controller
-const authenticate = require("../middleware/auth");
+const feedbackController = require("../controller/feedbackController");
+
 
 const router = express.Router();
 
@@ -13,13 +13,13 @@ router.post("/user/login", userController.loginUser);
 
 router
   .route("/user/:id")
-  .get(authenticate, userController.getUserById)
-  .put(authenticate, userController.updateUserById)
-  .delete(authenticate, userController.deleteUserById);
+  .get( userController.getUserById)
+  .put( userController.updateUserById)
+  .delete( userController.deleteUserById);
 
-router.get("/user/attended-events", authenticate, userController.attendedEvents);
-router.post("/user/book-event/:eventId", authenticate, userController.bookEvent);
-router.get("/user/generate-qr/:eventId", authenticate, userController.generateQR);
+router.get("/user/attended-events",userController.attendedEvents);
+router.post("/user/book-event/:eventId", userController.bookEvent);
+router.get("/user/generate-qr/:eventId", userController.generateQR);
 
 // Event Routes
 router
@@ -30,8 +30,8 @@ router
 router
   .route("/events/:id")
   .get(eventController.getEventById)
-  .put(authenticate, eventController.updateEventById)
-  .delete(authenticate, eventController.deleteEventById);
+  .put(eventController.updateEventById)
+  .delete(eventController.deleteEventById);
 
 // Feedback Routes
 router
@@ -41,12 +41,12 @@ router
 // Club Routes
 router.post("/club/register", clubController.registerClub);
 router.post("/club/login", clubController.loginClub);
-router.post("/club/:id/create-event", authenticate, clubController.createEvent);
+router.post("/club/:id/create-event",clubController.createEvent);
 router.get("/club/:id", clubController.displayClub);
 
 // Attendance Routes
-router.post("/attendance/mark", authenticate, clubController.markAttendance); // Route to mark attendance
-router.get("/attendance/:eventId", authenticate, clubController.getAttendanceForEvent); // Get attendance for an event
-router.get("/attendance", authenticate, clubController.getAllAttendanceRecords); // Optional: Get all attendance records
+router.post("/attendance/mark",clubController.markAttendance); // Route to mark attendance
+router.get("/attendance/:id",clubController.getAttendanceForEvent); // Get attendance for an event
+router.get("/attendance",clubController.getAllAttendanceRecords); // Optional: Get all attendance records
 
 module.exports = router;

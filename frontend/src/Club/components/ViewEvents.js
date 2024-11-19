@@ -66,53 +66,73 @@ const ViewEvents = () => {
       organizer: event.organizer,
     });
   };
-
   const handleUpdate = async (e) => {
     e.preventDefault();
+    console.log("Editing event ID:", editingEvent);
+    console.log("Form data:", formData);
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/events/${editingEvent}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-  
+      console.log(editingEvent);
+      const response = await fetch(`http://localhost:5000/api/events/${editingEvent}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      console.log("Response status:", response.status);
       if (!response.ok) {
-        throw new Error("Failed to update event");
+        throw new Error(`Failed to update event: ${response.statusText}`);
       }
-  
       const updatedEvent = await response.json();
-  
       alert("Event updated successfully!");
-  
-      // Update the events list
       setEvents((prev) =>
         prev.map((event) =>
           event._id === editingEvent ? updatedEvent.event : event
         )
       );
       resetForm();
-  
-      // Optionally redirect or stay on the same page
-      // window.location.href = "/view-events";
     } catch (err) {
       alert("Failed to update event: " + err.message);
     }
   };
+  
+  // const handleDelete = async (id) => {
+  //   if (window.confirm("Are you sure you want to delete this event?")) {
+  //     // Optimistically update UI
+  //     setEvents((prev) => prev.filter((event) => event._id !== id));
+  
+  //     try {
+  //       const response = await fetch(`http://localhost:5000/api/events/${id}`, {
+  //         method: "DELETE",
+  //       });
+  
+  //       if (response.status === 404) {
+  //         alert("Event not found!");
+  //         return;
+  //       }
+  
+  //       if (!response.ok) {
+  //         throw new Error(`Failed to delete event: ${response.statusText}`);
+  //       }
+  
+  //       alert("Event deleted successfully!");
+  //     } catch (err) {
+  //       alert("Error deleting event: " + err.message);
+  //       // Rollback optimistic update on error
+  //       setEvents((prev) => [...prev, events.find((event) => event._id === id)]);
+  //     }
+  //   }
+  // };
+  
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
-      // Optimistically update UI
-      setEvents((prev) => prev.filter((event) => event._id !== id));
-  
       try {
+        setLoading(true); // Set loading state to show a spinner or something
         const response = await fetch(`http://localhost:5000/api/events/${id}`, {
           method: "DELETE",
         });
   
         if (response.status === 404) {
           alert("Event not found!");
+          setLoading(false);
           return;
         }
   
@@ -121,15 +141,15 @@ const ViewEvents = () => {
         }
   
         alert("Event deleted successfully!");
+        // Update UI after successful deletion from the server
+        setEvents((prev) => prev.filter((event) => event._id !== id));
       } catch (err) {
         alert("Error deleting event: " + err.message);
-        // Rollback optimistic update on error
-        setEvents((prev) => [...prev, events.find((event) => event._id === id)]);
+      } finally {
+        setLoading(false); // Remove loading indicator after success or failure
       }
     }
   };
-  
-  
   // Loading or error states
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

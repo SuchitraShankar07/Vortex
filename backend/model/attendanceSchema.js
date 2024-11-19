@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const attendanceSchema = new mongoose.Schema({
   event: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "Event",
     required: true,
   },
   user: {
-    type: String, // Assuming Reference Number is used as the identifier
+    type: String, 
     required: true,
   },
   attended: {

@@ -57,7 +57,7 @@ function EventSelectionPage() {
 
   return (
     <div>
-      <Navbar /> {/* Navbar rendered here */}
+      <Navbar /> 
       <div
         style={{
           backgroundColor: '#121212',

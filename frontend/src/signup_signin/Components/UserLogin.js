@@ -31,14 +31,14 @@ function UserLogin() {
           const response = await fetch('http://localhost:5000/api/user/login', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ SRN: srn.toLowerCase(), password }),  // SRN in lowercase
+              body: JSON.stringify({ SRN: srn.toLowerCase(), password }),  
           });
   
           const data = await response.json();
   
           if (response.ok) {
             localStorage.setItem("userID", data.userID);
-              navigate('/user/dashboard'); // Redirect to the user dashboard on success
+              navigate('/user/dashboard'); 
           } else {
               setError(data.message || 'Invalid credentials.');
           }

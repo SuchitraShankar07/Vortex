@@ -28,7 +28,7 @@ function LoginPage() {
     <div className="page-container">
       <Navbar />
       <div className="container">
-        {/* User Section */}
+       
         <motion.div
           className="section user"
           onMouseEnter={() => setActiveSection('user')}
@@ -45,7 +45,7 @@ function LoginPage() {
           </div>
         </motion.div>
 
-        {/* Club Section */}
+     
         <motion.div
           className="section club"
           onMouseEnter={() => setActiveSection('club')}

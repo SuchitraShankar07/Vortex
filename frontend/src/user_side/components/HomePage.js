@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar'; // Import Navbar component
 import './HomePage.css';
 
 function HomePage() {
   return (
     <div className="homepage">
-    
 
-      {/* Homepage Content */}
       <div className="content">
         <h1 
           className="title" 

@@ -9,7 +9,7 @@ function EventDetailsModal({ event, onClose }) {
     const audio = new Audio(cashRegisterSound); 
     audio.play(); 
 
-    // Set the "Registered" text on the screen
+
     setIsRegistered(true);
   };
 

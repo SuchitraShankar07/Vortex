@@ -10,12 +10,11 @@ function ScanQR() {
     if (result) {
       setData(result.text);
       window.location.href = result.text; 
-      window.location.href = result.text; 
     }
   };
 
   const handleError = (err) => {
-    setError('Error during scanning. Please try again.');
+    setError('Error during scanning. Please try again.', err);
   };
 
   const previewStyle = {
@@ -30,7 +29,6 @@ function ScanQR() {
         delay={300}
         onError={handleError}
         onScan={handleScan}
-        ref={qrScannerRef}  
         ref={qrScannerRef}  
         style={previewStyle}
       />

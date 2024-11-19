@@ -1,19 +1,26 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-//cross origin ke liye
-const cors = require('cors');
 
+const cors = require('cors');
 const routes = require("./routes/routes.js");
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 app.use(express.json());
 
 
 
 app.use("/api", routes);
-
+app.get('/', (req, res) => {
+    res.send('API is running...');
+  });
 
 const PORT = process.env.PORT || 5000;
 

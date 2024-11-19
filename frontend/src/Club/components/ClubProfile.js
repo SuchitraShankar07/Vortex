@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import Navbar from './Navbar'; // Import Navbar component
-import './ClubProfile.css'; // Include CSS for styling
+import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import './ClubProfile.css';
 
 const ClubProfile = () => {
   const [profile, setProfile] = useState({
@@ -13,9 +13,8 @@ const ClubProfile = () => {
     campus: 'Ecity',
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate for redirection
+  const navigate = useNavigate();
 
-  // Load stored profile from localStorage on mount
   useEffect(() => {
     const storedProfile = localStorage.getItem('clubProfile');
     if (storedProfile) {
@@ -23,7 +22,6 @@ const ClubProfile = () => {
     }
   }, []);
 
-  // Handle input change
   const handleChange = (e) => {
     setProfile({
       ...profile,
@@ -31,23 +29,20 @@ const ClubProfile = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Club Profile:', profile);
-    localStorage.setItem('clubProfile', JSON.stringify(profile)); // Save profile to localStorage
+    localStorage.setItem('clubProfile', JSON.stringify(profile));
     alert('Profile updated successfully!');
   };
 
-  // Handle logout
   const handleLogout = () => {
-    localStorage.removeItem('clubProfile'); // Optional: clear profile from localStorage
-    navigate('/'); // Redirect to the login page
+    localStorage.removeItem('clubProfile');
+    navigate('/');
   };
 
   return (
     <div>
-      <Navbar /> {/* Include Navbar at the top */}
+      <Navbar />
       <div className="club-profile">
         <h2>Club Profile</h2>
         <form onSubmit={handleSubmit} className="profile-form">

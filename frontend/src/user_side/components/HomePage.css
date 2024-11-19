@@ -1,4 +1,4 @@
-/* General Homepage Styles */
+
 .homepage {
   min-height: 100vh;
   display: flex;
@@ -8,9 +8,9 @@
  
 }
 
-/* Content Section */
+
 .content {
-  flex: 1; /* Makes content fill available space */
+  flex: 1; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Title Styles */
+
 .title {
   font-size: 4rem;
   color: #00bfa6;
@@ -29,7 +29,7 @@
   transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Description Styles */
+
 .description {
   max-width: 600px;
   margin: 20px auto;
@@ -39,12 +39,12 @@
   animation: textFadeIn 2s ease-out;
 }
 
-/* Button Group Styles */
+
 .button-group {
   margin-top: 30px;
 }
 
-/* Button Styles */
+
 .btn {
   background-color: #00bfa6;
   color: #ffffff;
@@ -63,7 +63,7 @@
   transform: scale(1.1);
 }
 
-/* Back to Top Button Specific Styles */
+
 .back-to-top {
   background-color: #444;
   transition: transform 0.3s ease, background-color 0.3s ease;

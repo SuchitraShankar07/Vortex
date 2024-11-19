@@ -67,7 +67,7 @@
 
 .btn:hover {
   background-color: #008f74;
-  transform: scale(45); /* Scale up the button to 115% of its size */
+  transform: scale(45); 
 }
 @keyframes fadeIn {
   0% { opacity: 0; transform: translateY(20px); }

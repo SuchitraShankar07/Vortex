@@ -29,12 +29,12 @@ function HomePage() {
         }}
         onMouseEnter={(e) => {
           e.target.style.transform = 'scale(1.2)';
-          e.target.style.color = '#00bfa6'; // Neon blue color
+          e.target.style.color = '#00bfa6'; 
           e.target.style.textShadow = '0 0 10px #00bfa6, 0 0 20px #00bfa6, 0 0 30px #00bfa6';
         }}
         onMouseLeave={(e) => {
           e.target.style.transform = 'scale(1)';
-          e.target.style.color = '#00aced'; // Original color
+          e.target.style.color = '#00aced'; 
           e.target.style.textShadow = 'none';
         }}
       >

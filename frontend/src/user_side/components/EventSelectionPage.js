@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import EventDetailsModal from './EventDetailsModel.js'; // Import the modal component
-
+import EventDetailsModal from './EventDetailsModel.js'; 
 function EventSelectionPage() {
-  const [events, setEvents] = useState([]); // State to store events
-  const [loading, setLoading] = useState(true); // State to track loading status
-  const [error, setError] = useState(null); // State to track errors
-  const [selectedEvent, setSelectedEvent] = useState(null); // State to store selected event
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [events, setEvents] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+  const [selectedEvent, setSelectedEvent] = useState(null); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
-  // Fetch events when the component mounts
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -29,13 +27,13 @@ function EventSelectionPage() {
   }, []);
 
   const openModal = (event) => {
-    setSelectedEvent(event); // Set the selected event
-    setIsModalOpen(true); // Open the modal
+    setSelectedEvent(event); 
+    setIsModalOpen(true); 
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
-    setSelectedEvent(null); // Clear the selected event
+    setIsModalOpen(false); 
+    setSelectedEvent(null); 
   };
 
   if (loading) {
@@ -50,11 +48,11 @@ function EventSelectionPage() {
     <div style={{ backgroundColor: '#121212', color: '#ffffff', minHeight: '100vh', padding: '50px' }}>
       <h1 style={{ color: '#00aced', textAlign: 'center', fontSize: '3rem' }}>Vortex Events</h1>
 
-      {/* Render events only if available */}
+   
       {Array.isArray(events) && events.length > 0 ? (
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
           {events.map((event) => {
-            console.log('Rendering event:', event); // Check each event structure
+            console.log('Rendering event:', event); 
             return (
               <div
                 key={event._id}
@@ -84,7 +82,7 @@ function EventSelectionPage() {
                     fontSize: '1.1rem',
                   }}
                   className="register-button"
-                  onClick={() => openModal(event)} // Open modal on button click
+                  onClick={() => openModal(event)} 
                 >
                   Register
                 </button>
@@ -96,7 +94,7 @@ function EventSelectionPage() {
         <div>No events available</div>
       )}
 
-      {/* Render the modal if it's open */}
+     
       {isModalOpen && selectedEvent && (
         <EventDetailsModal event={selectedEvent} onClose={closeModal} />
       )}

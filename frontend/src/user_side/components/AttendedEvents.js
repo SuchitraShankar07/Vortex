@@ -1,4 +1,4 @@
-// AttendedEvents.js
+
 import React, { useState } from "react";
 import "./EventList.css";
 

@@ -7,12 +7,12 @@ function AttendancePage() {
   const [eventId, setEventId] = useState('');
   const [showQR, setShowQR] = useState(false);
 
-  // Handle the "Generate QR" button click
+
   const handleGenerateQR = () => {
     if (referenceNumber.trim() === '' || eventId.trim() === '') {
       alert('Please enter both Reference Number and Event ID.');
     } else {
-      setShowQR(true); // Show the QR code
+      setShowQR(true);
     }
   };
 

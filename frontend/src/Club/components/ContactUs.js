@@ -80,7 +80,7 @@ class ContactPage extends Component {
         <div className="contact-container">
           <h1>Contact Us</h1>
           <form onSubmit={this.handleSubmit} className="contact-form">
-            {/* Horizontal Form Layout */}
+   
             <div className="contact-row">
               <div className="formGroup">
                 <label htmlFor="name">Name</label>

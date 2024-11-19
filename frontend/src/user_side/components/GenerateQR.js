@@ -10,7 +10,7 @@ function GenerateQR({ referenceNumber, eventId }) {
     <div style={{ textAlign: 'center', margin: '20px' }}>
       <h3 style={{ color: '#007bff' }}>QR Code for SRN: {referenceNumber} and Event ID: {eventId}</h3>
       <QRCodeCanvas
-        value={url} // Directly encode the SRN and Event ID in the QR code URL
+        value={url} 
         size={200}
         bgColor="#ffffff"
         fgColor="#007bff"

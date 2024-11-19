@@ -17,7 +17,7 @@ function EventRegistration() {
   };
 
   const handlePayment = () => {
-    // Opens the payment link in a new tab/window
+    
     window.open('https://www.pesuacademy.com/Academy/', '_blank');
   };
 

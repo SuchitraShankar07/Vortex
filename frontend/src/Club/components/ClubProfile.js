@@ -10,7 +10,7 @@ const ClubProfile = () => {
     domain: '',
     campus: 'Ecity',
   });
-
+  
   useEffect(() => {
     const storedProfile = localStorage.getItem('clubProfile');
     if (storedProfile) {

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import cashRegisterSound from './cash-register-kaching-sound-effect-125042.mp3'; // Import the audio file
+import cashRegisterSound from './cash-register-kaching-sound-effect-125042.mp3'; 
 
 function EventDetailsModal({ event, onClose }) {
   const [isRegistered, setIsRegistered] = useState(false);
 
-  // Function to handle the "Attend Event" button click
+
   const handleAttendClick = () => {
-    const audio = new Audio(cashRegisterSound); // Use the imported audio file
-    audio.play(); // Play the sound
+    const audio = new Audio(cashRegisterSound); 
+    audio.play(); 
 
     // Set the "Registered" text on the screen
     setIsRegistered(true);
@@ -24,13 +24,13 @@ function EventDetailsModal({ event, onClose }) {
         <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
         <p><strong>Organizer:</strong> {event.organizer}</p>
 
-        {/* Attend Event Button */}
+        
         {!isRegistered ? (
           <button onClick={handleAttendClick} style={attendButtonStyles}>
             Attend Event
           </button>
         ) : (
-          <p style={registeredTextStyles}>Registered</p> // Display "Registered" when clicked
+          <p style={registeredTextStyles}>Registered</p> 
         )}
 
         <button onClick={onClose} style={closeButtonStyles}>Close</button>

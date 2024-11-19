@@ -1,11 +1,11 @@
 
-/* General Styling for Navbar */
+
 .navbar {
-  position: sticky; /* Keeps the navbar at the top when scrolling */
+  position: sticky; 
   top: 0;
-  z-index: 1000; /* Ensures it stays above other content */
+  z-index: 1000; 
   width: 100%;
-  background-color: #121212; /* Black background */
+  background-color: #121212; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,7 @@
   animation: fadeIn 2s ease-in-out;
 }
 
-/* Logo Styling */
+
 .logo {
   font-size: 1.8rem;
   color: #00bfa6;
@@ -26,10 +26,10 @@
 }
 
 .logo:hover {
-  transform: scale(1.1); /* Slight zoom on hover */
+  transform: scale(1.1); 
 }
 
-/* Navigation Links */
+
 .nav-links {
   display: flex;
   gap: 20px;
@@ -45,15 +45,14 @@
   transition: background-color 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Neon Blue Hover Effect for Links */
+
 .nav-links a:hover {
-  background-color: #121212; /* Keep the background black */
-  color: #00bfa6; /* Neon blue text */
+  background-color: #121212; 
+  color: #00bfa6; 
   text-shadow: 0 0 10px #00bfa6, 0 0 20px #00bfa6, 0 0 30px #00bfa6; /* Neon glow effect */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Blue Fade-In Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -65,7 +64,7 @@
   }
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .nav-links {
     flex-direction: column;

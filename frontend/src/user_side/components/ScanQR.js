@@ -4,12 +4,12 @@ import QrScanner from 'react-qr-scanner';
 function ScanQR() {
   const [data, setData] = useState('');
   const [error, setError] = useState(null);
-  const qrScannerRef = useRef(null);  // UseRef initialization
+  const qrScannerRef = useRef(null);  
 
   const handleScan = (result) => {
     if (result) {
       setData(result.text);
-      window.location.href = result.text; // Redirect to the scanned URL
+      window.location.href = result.text; 
     }
   };
 
@@ -29,7 +29,7 @@ function ScanQR() {
         delay={300}
         onError={handleError}
         onScan={handleScan}
-        ref={qrScannerRef}  // Correctly using useRef
+        ref={qrScannerRef}  
         style={previewStyle}
       />
       {error && <p>{error}</p>}

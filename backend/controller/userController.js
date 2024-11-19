@@ -19,7 +19,6 @@ exports.attendedEvents = async( req, res) =>{
 //     try {
 //         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         
-//         // leaving out password from the response coz cybersekuriti or smn idk man
 //         const user = await User.create({ ...req.body, password: hashedPassword });
 //         const userWithoutPassword = user.toObject();
 //         delete userWithoutPassword.password;

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import EventDetailsModal from './EventDetailsModel.js'; 
 
+import EventDetailsModal from './EventDetailsModel.js'; // Import the modal component
+
 function EventSelectionPage() {
   const [events, setEvents] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
   const [selectedEvent, setSelectedEvent] = useState(null); 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -33,7 +35,7 @@ function EventSelectionPage() {
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(false); 
     setSelectedEvent(null); 
   };
 
@@ -49,6 +51,7 @@ function EventSelectionPage() {
     <div style={{ backgroundColor: '#121212', color: '#ffffff', minHeight: '100vh', padding: '50px' }}>
       <h1 style={{ color: '#00aced', textAlign: 'center', fontSize: '3rem' }}>Vortex Events</h1>
 
+   
       {Array.isArray(events) && events.length > 0 ? (
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
           {events.map((event) => {
@@ -94,6 +97,7 @@ function EventSelectionPage() {
         <div>No events available</div>
       )}
 
+     
       {isModalOpen && selectedEvent && (
         <EventDetailsModal event={selectedEvent} onClose={closeModal} />
       )}

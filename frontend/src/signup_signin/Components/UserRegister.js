@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import './UserRegister.css';
+import './Register.css'
 
 function UserRegister() {
   const [formData, setFormData] = useState({
@@ -63,11 +63,12 @@ function UserRegister() {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("userID", data.userID);
         setSuccess('Registration successful! Redirecting...');
         setTimeout(() => {
           setSuccess('');
           navigate('/user/dashboard');
-        }, 2000); // Redirect to dashboard after 2 seconds
+        }, 2000); //2 second buffer time
       } else {
         setError(data.message || 'Registration failed. Please try again.');
       }
@@ -82,6 +83,7 @@ function UserRegister() {
   };
 
   return (
+    <div className="center-container">
     <motion.div
       className="form-card"
       initial={{ opacity: 0, y: 20 }}
@@ -168,9 +170,9 @@ function UserRegister() {
           required
         />
         <motion.button
+        className="toggle"
           type="submit"
-          className="register-button"
-          whileHover={{ scale: 1.1, backgroundColor: '#20b2aa' }}
+      whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           Register
@@ -183,11 +185,13 @@ function UserRegister() {
         transition={{ duration: 1, delay: 0.5 }}
       >
         Already have an account?{' '}
-        <span className="login-link" onClick={() => navigate('/')}>
+        <motion.span className="login-link" onClick={() => navigate('/')}
+          whileHover={{ textDecoration: "underline", cursor: "pointer" }}>
           Login
-        </span>
+        </motion.span>
       </motion.p>
     </motion.div>
+    </div>
   );
 }
 

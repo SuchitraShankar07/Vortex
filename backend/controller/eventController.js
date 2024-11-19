@@ -12,7 +12,6 @@ exports.getAllEvents = async (req, res) => {
 
 exports.getEventById = async (req, res) => {
   try {
-    console.log("here lies the issue")
     const event = await Event.findById(mongoose.Types.ObjectId(req.params.id));
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
@@ -27,12 +26,12 @@ exports.createEvent = async (req, res) => {
   try {
     const { eventName, description, campus, venue, date, organizer } = req.body;
 
-    // Validate required fields
+
     if (!eventName || !description || !campus || !venue || !date || !organizer) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Create and save the new event
+
     const newEvent = new Event({
       eventName,
       description,

@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
+//cross origin ke liye
 const cors = require('cors');
 
 const routes = require("./routes/routes.js");

@@ -17,7 +17,7 @@ function EventRegistration() {
   };
 
   const handlePayment = () => {
-    
+  
     window.open('https://www.pesuacademy.com/Academy/', '_blank');
   };
 

@@ -31,6 +31,7 @@ function EventDetailsModal({ event, onClose }) {
           </button>
         ) : (
           <p style={registeredTextStyles}>Registered</p> 
+          <p style={registeredTextStyles}>Registered</p> 
         )}
 
         <button onClick={onClose} style={closeButtonStyles}>Close</button>

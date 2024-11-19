@@ -10,6 +10,7 @@ function ScanQR() {
     if (result) {
       setData(result.text);
       window.location.href = result.text; 
+      window.location.href = result.text; 
     }
   };
 
@@ -29,6 +30,7 @@ function ScanQR() {
         delay={300}
         onError={handleError}
         onScan={handleScan}
+        ref={qrScannerRef}  
         ref={qrScannerRef}  
         style={previewStyle}
       />

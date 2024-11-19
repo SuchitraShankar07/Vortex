@@ -8,7 +8,9 @@ const Navbar = () => {
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+    console.log("Navbar open:", !isOpen);
   };
+  
 
   return (
     <nav className='navbar'>

@@ -1,35 +1,50 @@
+/* General Homepage Styles */
 .homepage {
-  text-align: center;
-  padding: 100px 20px;
-  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(18,18,18,1) 100%);
-  color: #ffffff;
   min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(18, 18, 18, 1) 100%);
+ 
 }
 
+/* Content Section */
+.content {
+  flex: 1; /* Makes content fill available space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Title Styles */
 .title {
   font-size: 4rem;
   color: #00bfa6;
-  animation: fadeIn 2s ease-in-out;
+  font-weight: bold;
+  margin-top: 50px;
+  animation: textFadeIn 2s ease-out;
+  transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.tagline {
-  font-style: italic;
-  color: #57cfc5;
-  font-size: 1.5rem;
-  margin-top: 20px;
-}
-
+/* Description Styles */
 .description {
   max-width: 600px;
   margin: 20px auto;
-  line-height: 1.6;
   font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 300;
+  animation: textFadeIn 2s ease-out;
 }
 
+/* Button Group Styles */
 .button-group {
   margin-top: 30px;
 }
 
+/* Button Styles */
 .btn {
   background-color: #00bfa6;
   color: #ffffff;
@@ -40,7 +55,7 @@
   font-size: 16px;
   font-weight: bold;
   border-radius: 30px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn:hover {
@@ -48,36 +63,17 @@
   transform: scale(1.1);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-.btn {
-  background-color: #00bfa6;
-  color: #ffffff;
-  border: none;
-  padding: 12px 24px;
-  margin: 0 10px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 30px;
+/* Back to Top Button Specific Styles */
+.back-to-top {
+  background-color: #444;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #008f74;
-  transform: scale(45); 
-}
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+.back-to-top:hover {
+  background-color: #00aced;
 }
 
-@keyframes textFadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -97,4 +93,3 @@
     transform: translateY(0);
   }
 }
-

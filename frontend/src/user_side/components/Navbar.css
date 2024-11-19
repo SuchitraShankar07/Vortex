@@ -1,18 +1,12 @@
 
-
-.navbar {
-  position: sticky; 
-  top: 0;
-  z-index: 1000; 
-  width: 100%;
+.navbar1 {
   background-color: #121212; 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
+  background-color: #121212; 
+  max-height: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   animation: fadeIn 2s ease-in-out;
 }
+
 
 
 .logo {
@@ -27,7 +21,9 @@
 
 .logo:hover {
   transform: scale(1.1); 
+  transform: scale(1.1); 
 }
+
 
 
 .nav-links {
@@ -46,13 +42,13 @@
 }
 
 
+
 .nav-links a:hover {
   background-color: #121212; 
   color: #00bfa6; 
-  text-shadow: 0 0 10px #00bfa6, 0 0 20px #00bfa6, 0 0 30px #00bfa6; 
+  text-shadow: 0 0 10px #00bfa6, 0 0 20px #00bfa6, 0 0 30px #00bfa6; /* Neon glow effect */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 
 @keyframes fadeIn {
   from {
@@ -64,6 +60,7 @@
     transform: translateY(0);
   }
 }
+
 
 
 @media (max-width: 768px) {

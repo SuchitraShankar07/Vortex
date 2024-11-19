@@ -5,9 +5,11 @@ function ScanQR() {
   const [data, setData] = useState('');
   const [error, setError] = useState(null);
   const qrScannerRef = useRef(null);  
+
   const handleScan = (result) => {
     if (result) {
       setData(result.text);
+      window.location.href = result.text; 
       window.location.href = result.text; 
     }
   };
@@ -28,6 +30,7 @@ function ScanQR() {
         delay={300}
         onError={handleError}
         onScan={handleScan}
+        ref={qrScannerRef}  
         ref={qrScannerRef}  
         style={previewStyle}
       />

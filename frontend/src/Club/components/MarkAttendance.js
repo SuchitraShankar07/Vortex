@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './MarkAttendance.css'; 
+import Navbar from './Navbar'; // Import Navbar component
+import './MarkAttendance.css';
 
 function MarkAttendance() {
   const [srn, setSrn] = useState('');
@@ -32,25 +33,28 @@ function MarkAttendance() {
   };
 
   return (
-    <div className="mark-attendance-page">
-      <h2>Mark Attendance</h2>
-      <div className="attendance-info">
-        <p>
-          <strong>SRN:</strong> {srn || 'Not available'}
-        </p>
-        <p>
-          <strong>Event ID:</strong> {eventId || 'Not available'}
-        </p>
+    <div>
+      <Navbar /> {/* Include the Navbar */}
+      <div className="mark-attendance-page">
+        <h2>Mark Attendance</h2>
+        <div className="attendance-info">
+          <p>
+            <strong>SRN:</strong> {srn || 'Not available'}
+          </p>
+          <p>
+            <strong>Event ID:</strong> {eventId || 'Not available'}
+          </p>
+        </div>
+        <button onClick={markAttendance} className="mark-attendance-btn">
+          Mark Attendance
+        </button>
+        {attendanceMarked && (
+          <div className="success-message">Attendance successfully marked!</div>
+        )}
+        <button onClick={() => navigate('/attendance')} className="go-back-btn">
+          Go Back
+        </button>
       </div>
-      <button onClick={markAttendance} className="mark-attendance-btn">
-        Mark Attendance
-      </button>
-      {attendanceMarked && (
-        <div className="success-message">Attendance successfully marked!</div>
-      )}
-      <button onClick={() => navigate('/attendance')} className="go-back-btn">
-        Go Back
-      </button>
     </div>
   );
 }

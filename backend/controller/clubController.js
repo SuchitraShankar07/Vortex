@@ -70,18 +70,58 @@ exports.createEvent = async (req, res) => {
     }
 };
 
+
+
+// Mark attendance for a user
 exports.markAttendance = async (req, res) => {
-    try {
-        const { eventId, userId } = req.body;
-        const attendance = await Attendance.findOneAndUpdate(
-            { event: eventId, user: userId },
-            { attended: true },
-            { upsert: true, new: true }
-        );
-        res.json(attendance);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+  try {
+    const { eventId, userId } = req.body;
+
+    if (!eventId || !userId) {
+      return res.status(400).json({ error: "Event ID and User ID are required." });
     }
+
+    const attendance = await Attendance.findOneAndUpdate(
+      { event: eventId, user: userId },
+      { attended: true },
+      { upsert: true, new: true }
+    );
+
+    if (!attendance) {
+      return res.status(500).json({ error: "Failed to mark attendance in the database." });
+    }
+
+    res.status(200).json({ message: "Attendance marked successfully.", attendance });
+  } catch (err) {
+    console.error("Error marking attendance:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+// Get attendance for a specific event
+exports.getAttendanceForEvent = async (req, res) => {
+  try {
+    const { eventId } = req.params;
+
+    const attendanceRecords = await Attendance.find({ event: eventId });
+
+    res.status(200).json(attendanceRecords);
+  } catch (err) {
+    console.error("Error fetching attendance records:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+// Get all attendance records
+exports.getAllAttendanceRecords = async (req, res) => {
+  try {
+    const attendanceRecords = await Attendance.find();
+
+    res.status(200).json(attendanceRecords);
+  } catch (err) {
+    console.error("Error fetching all attendance records:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
 };
 
 

@@ -7,12 +7,12 @@ function AttendancePage() {
   const [eventId, setEventId] = useState('');
   const [showQR, setShowQR] = useState(false);
 
-  // Handle the "Generate QR" button click
+ 
   const handleGenerateQR = () => {
     if (referenceNumber.trim() === '' || eventId.trim() === '') {
       alert('Please enter both Reference Number and Event ID.');
     } else {
-      setShowQR(true); // Show the QR code
+      setShowQR(true); 
     }
   };
 
@@ -38,7 +38,7 @@ function AttendancePage() {
           value={referenceNumber}
           onChange={(e) => {
             setReferenceNumber(e.target.value);
-            setShowQR(false); // Hide QR when inputs change
+            setShowQR(false); 
           }}
           className="input-field"
           style={{
@@ -57,7 +57,7 @@ function AttendancePage() {
           value={eventId}
           onChange={(e) => {
             setEventId(e.target.value);
-            setShowQR(false); // Hide QR when inputs change
+            setShowQR(false); 
           }}
           className="input-field"
           style={{
@@ -93,7 +93,7 @@ function AttendancePage() {
         )}
       </div>
       <div style={{ marginTop: '30px' }}>
-        <ScanQR /> {/* Scan QR component to handle attendance scanning */}
+        <ScanQR /> 
       </div>
     </div>
   );

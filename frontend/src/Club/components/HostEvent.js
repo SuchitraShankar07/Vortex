@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './HostEvent.css'; // Assuming you will create styles for the form
+import React, { useState, useEffect } from 'react';
+import './HostEvent.css'; 
 import { useNavigate } from 'react-router-dom';
 
 const HostEvent = () => {
@@ -7,26 +7,30 @@ const HostEvent = () => {
   const [clubName, setClubName] = useState('');
   const [description, setDescription] = useState('');
   const [dateTime, setDateTime] = useState('');
-  const [campus, setCampus] = useState('RR');
+  const [campus, setCampus] = useState('Ecity');
   const [venue, setVenue] = useState('Seminar Hall 1');
   const navigate = useNavigate();
 
-  // Handle the form submission
+  useEffect(() => { const storedProfile = localStorage.getItem('clubProfile'); 
+    if (storedProfile) { 
+      const profile = JSON.parse(storedProfile); 
+      setClubName(profile.clubName); 
+    } }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Prepare the payload
     const payload = {
       eventName,
       description,
       campus,
       venue,
-      date: dateTime, // Ensure this matches the backend's expected "date"
-      organizer: clubName, // Match backend schema
+      date: dateTime, 
+      organizer: clubName, 
     };
   
     try {
-      // Send POST request to backend
+      
       const response = await fetch("http://localhost:5000/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,15 +41,15 @@ const HostEvent = () => {
         throw new Error("Failed to create event");
       }
   
-      // Clear the form after submission
+
       setEventName("");
       setDescription("");
-      setCampus("RR");
+      setCampus("Ecity");
       setVenue("Seminar Hall 1");
       setDateTime("");
       setClubName("");
   
-      // Redirect to the View Events page
+  
       navigate("/view-events");
     } catch (error) {
       console.error("Error creating event:", error);
@@ -57,7 +61,6 @@ const HostEvent = () => {
     <div className="host-event">
       <h1>Host Your Event</h1>
       <form className="event-form" onSubmit={handleSubmit}>
-        {/* Row 1 - Event Name and Club Name */}
         <div className="form-row">
           <div className="form-group">
             <label>Event Name:</label>
@@ -79,7 +82,6 @@ const HostEvent = () => {
           </div>
         </div>
 
-        {/* Row 2 - Description */}
         <div className="form-group description">
           <label>Description:</label>
           <textarea
@@ -89,7 +91,6 @@ const HostEvent = () => {
           />
         </div>
 
-        {/* Row 3 - Date & Time and Campus */}
         <div className="form-row-date-time">
           <div className="form-group">
             <label>Date & Time:</label>
@@ -100,6 +101,7 @@ const HostEvent = () => {
               required
             />
           </div>
+
           <div className="form-group">
             <label>Campus:</label>
             <select
@@ -113,7 +115,6 @@ const HostEvent = () => {
           </div>
         </div>
 
-        {/* Row 4 - Venue */}
         <div className="form-row-venue">
           <div className="form-group">
             <label>Venue:</label>

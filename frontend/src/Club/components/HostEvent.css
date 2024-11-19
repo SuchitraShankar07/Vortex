@@ -1,78 +1,71 @@
-/* Scoped HostEvent container */
 .host-event {
   padding: 30px;
-  background-color: #f0f0f0; /* Light grey background */
+  background-color: #f0f0f0; 
   max-width: 1000px;
   margin: 0 auto;
   border-radius: 15px;
-  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1); /* Soft shadow */
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1); 
   color: #f8f2f2;
 }
 
-/* Scoped headings */
 .host-event h1 {
   font-size: 2.5rem;
   text-align: center;
-  color: #014463; /* Darker text for the main heading */
+  color: #014463;
   margin-bottom: 20px;
 }
 
-/* Scoped event form styling */
 .host-event .event-form {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Increased space between form elements */
+  gap: 25px; 
 }
 
 .host-event .form-group {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Increased space between label and input */
+  gap: 15px; 
 }
 
-/* Row 1 (Event name, Club name) */
 .host-event .form-row {
   display: flex;
   justify-content: space-between;
-  gap: 30px; /* Increased space between form elements in the same row */
+  gap: 30px; 
 }
 
 .host-event .form-row .form-group {
-  flex: 1; /* Make the form groups take up equal space */
+  flex: 1;
 }
 
-/* Row 2 (Description) */
 .host-event .form-group.description {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Increased space within the description group */
+  gap: 15px; 
 }
 
-/* Row 3 (Date & Time and Campus) */
 .host-event .form-row-date-time {
   display: flex;
   justify-content: space-between;
-  gap: 30px; /* Increased space between form elements in the same row */
+  gap: 30px;
 }
 
 .host-event .form-row-date-time .form-group {
-  flex: 1; /* Make the form groups take up equal space */
+  flex: 1;
 }
 
-/* Row 4 (Venue and Image upload) */
 .host-event .form-row-venue-image {
   display: flex;
   justify-content: space-between;
-  gap: 30px; /* Increased space between form elements in the same row */
+  gap: 30px;
 }
 
 .host-event .form-row-venue-image .form-group {
-  flex: 1; /* Make the form groups take up equal space */
+  flex: 1;
 }
 
 .host-event .form-group label {
   font-weight: 500;
-  color: #03a5a5; /* Blue color for labels */
+  color: #03a5a5;
   font-size: 1.1rem;
 }
 
@@ -101,7 +94,6 @@
   outline: none;
 }
 
-/* Scoped submit button */
 .host-event .submit-btn {
   background-color: #3498db;
   color: white;
@@ -139,7 +131,6 @@
   border-color: #3498db;
 }
 
-/* Image upload styling */
 .host-event .input-file-container {
   position: relative;
 }
@@ -171,7 +162,6 @@
   display: none;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .host-event {
     padding: 20px;
@@ -193,7 +183,6 @@
     font-size: 1.4rem;
   }
 
-  /* Stack rows for smaller screens */
   .host-event .form-row,
   .host-event .form-row-date-time,
   .host-event .form-row-venue-image {
@@ -203,8 +192,8 @@
   .host-event .form-row .form-group,
   .host-event .form-row-date-time .form-group,
   .host-event .form-row-venue-image .form-group {
-    flex: unset; /* Remove equal space distribution */
+    flex: unset;
     width: 100%;
-    gap: 20px; /* Ensure full-width for inputs on smaller screens */
+    gap: 20px;
   }
 }

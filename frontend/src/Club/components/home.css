@@ -1,42 +1,40 @@
-/* Home page container */
+
 .home-page {
   padding: 20px;
 }
 
-/* Intro section */
 .home-page .intro h1,
 .home-page .intro h2 {
   text-align: center;
 }
 
-/* Image carousel */
+
 .home-page .image-carousel {
   margin-top: 30px;
   text-align: center;
 }
 
 .home-page .carousel-image {
-  width: 100%; /* Make the images responsive */
-  max-width: 600px; /* Limit the max width */
+  width: 100%; 
+  max-width: 600px; 
   height: auto;
   border-radius: 8px;
   margin: 0 auto;
 }
 
-/* Grid layout for sections */
 .home-page .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  grid-gap: 20px; /* Space between boxes */
+  grid-template-columns: repeat(3, 1fr); 
+  grid-gap: 20px; 
   margin-top: 40px;
 }
 
 .home-page .section-box {
-  background-color: #fff;
+  background-color: #a4e6ec;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Initial shadow */
-  transition: all 0.3s ease; /* Smooth transition for hover effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease; 
 }
 
 .home-page .section-box h2 {
@@ -50,19 +48,18 @@
 }
 
 .home-page .section-box:hover {
-  transform: translateY(-10px); /* Move the box upwards */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  transform: translateY(-10px); 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
-/* Responsive design adjustments */
 @media (max-width: 768px) {
   .home-page .grid-container {
-    grid-template-columns: 1fr 1fr; /* 2 columns for smaller screens */
+    grid-template-columns: 1fr 1fr; 
   }
 }
 
 @media (max-width: 480px) {
   .home-page .grid-container {
-    grid-template-columns: 1fr; /* 1 column for very small screens */
+    grid-template-columns: 1fr; 
   }
 }

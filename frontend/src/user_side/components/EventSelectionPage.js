@@ -3,43 +3,38 @@ import React, { useState, useEffect } from 'react';
 import EventDetailsModal from './EventDetailsModel.js'; // Import the modal component
 
 function EventSelectionPage() {
-  const [events, setEvents] = useState([]); // State to store events
-  const [loading, setLoading] = useState(true); // State to track loading status
-  const [error, setError] = useState(null); // State to track errors
-  const [selectedEvent, setSelectedEvent] = useState(null); // State to store selected event
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [events, setEvents] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+  const [selectedEvent, setSelectedEvent] = useState(null); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
-  // Fetch events when the component mounts
   useEffect(() => {
-    fetch('http://localhost:5000/api/events')
-      .then((response) => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/events");
         if (!response.ok) {
-          throw new Error('Failed to fetch events');
+          throw new Error("Failed to fetch events");
         }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Fetched events:', data); // Log the response to check the structure
-        // Ensure that 'data' is an array, or extract the array from a different key (e.g., 'data.events')
-        const eventsArray = Array.isArray(data) ? data : Array.isArray(data.events) ? data.events : [];
-        console.log('Final events array:', eventsArray); // Log final events array
-        setEvents(eventsArray);
-        setLoading(false);
-      })
-      .catch((err) => {
+        const data = await response.json();
+        setEvents(data.data.events || []);
+      } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchEvents();
   }, []);
 
   const openModal = (event) => {
-    setSelectedEvent(event); // Set the selected event
-    setIsModalOpen(true); // Open the modal
+    setSelectedEvent(event); 
+    setIsModalOpen(true); 
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
-    setSelectedEvent(null); // Clear the selected event
+    setIsModalOpen(false); 
+    setSelectedEvent(null); 
   };
 
   if (loading) {
@@ -54,11 +49,11 @@ function EventSelectionPage() {
     <div style={{ backgroundColor: '#121212', color: '#ffffff', minHeight: '100vh', padding: '50px' }}>
       <h1 style={{ color: '#00aced', textAlign: 'center', fontSize: '3rem' }}>Vortex Events</h1>
 
-      {/* Render events only if available */}
+   
       {Array.isArray(events) && events.length > 0 ? (
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
           {events.map((event) => {
-            console.log('Rendering event:', event); // Check each event structure
+            console.log('Rendering event:', event); 
             return (
               <div
                 key={event._id}
@@ -88,7 +83,7 @@ function EventSelectionPage() {
                     fontSize: '1.1rem',
                   }}
                   className="register-button"
-                  onClick={() => openModal(event)} // Open modal on button click
+                  onClick={() => openModal(event)} 
                 >
                   Register
                 </button>
@@ -100,7 +95,7 @@ function EventSelectionPage() {
         <div>No events available</div>
       )}
 
-      {/* Render the modal if it's open */}
+     
       {isModalOpen && selectedEvent && (
         <EventDetailsModal event={selectedEvent} onClose={closeModal} />
       )}

@@ -21,6 +21,7 @@ function ClubLogin() {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem('clubProfile', JSON.stringify(data.club));
         navigate('/club/dashboard');
       } else {
         setError(data.message || 'Invalid credentials');
@@ -65,13 +66,12 @@ function ClubLogin() {
       </form>
       <p>
         Don't have an account?{' '}
-        <motion.span
+        <span
           className="link"
           onClick={() => navigate('/club/register')}
-          whileHover={{ textDecoration: "underline", cursor: "pointer" }}
         >
           Register
-        </motion.span>
+        </span>
       </p>
     </motion.div>
   );

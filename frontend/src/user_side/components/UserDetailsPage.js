@@ -103,8 +103,6 @@ const UserDetailsPage = ({ userId }) => {
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Phone:</strong> {user.phone}</p>
           <p><strong>SRN:</strong> {user.SRN}</p>
-          <p><strong>Booked Events:</strong> {user.bookedEvents.map((event) => event.name).join(", ")}</p>
-          <p><strong>Attended Events:</strong> {user.attendedEvents.map((attendance) => attendance.name).join(", ")}</p>
           <button onClick={() => setIsEditing(true)}>Edit Details</button>
         </div>
       )}

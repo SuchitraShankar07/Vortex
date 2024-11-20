@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EventDetailsModal from './EventDetailsModel.js';
 import Navbar from './Navbar.js';
+import registerSound from './cash-register-kaching-sound-effect-125042.mp3'; // Import the MP3 file
 
 function EventSelectionPage() {
   const [events, setEvents] = useState([]);
@@ -8,6 +9,7 @@ function EventSelectionPage() {
   const [error, setError] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [registeredEvents, setRegisteredEvents] = useState(new Set());
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -37,6 +39,21 @@ function EventSelectionPage() {
     setSelectedEvent(null);
   };
 
+  const toggleRegister = (eventId) => {
+    const sound = new Audio(registerSound); // Create an Audio instance
+
+    setRegisteredEvents((prev) => {
+      const updated = new Set(prev);
+      if (updated.has(eventId)) {
+        updated.delete(eventId);
+      } else {
+        updated.add(eventId);
+        sound.play(); // Play sound on registering
+      }
+      return updated;
+    });
+  };
+
   if (loading) {
     return (
       <div>
@@ -57,7 +74,7 @@ function EventSelectionPage() {
 
   return (
     <div>
-      <Navbar /> 
+      <Navbar />
       <div
         style={{
           backgroundColor: '#121212',
@@ -86,7 +103,7 @@ function EventSelectionPage() {
             }}
           >
             {events.map((event) => {
-              console.log('Rendering event:', event);
+              const isRegistered = registeredEvents.has(event._id);
               return (
                 <div
                   key={event._id}
@@ -106,7 +123,7 @@ function EventSelectionPage() {
                   <p>{event.description}</p>
                   <button
                     style={{
-                      backgroundColor: '#00aced',
+                      backgroundColor: isRegistered ? '#28a745' : '#00aced',
                       color: '#ffffff',
                       padding: '12px 20px',
                       borderRadius: '5px',
@@ -116,9 +133,9 @@ function EventSelectionPage() {
                       fontSize: '1.1rem',
                     }}
                     className="register-button"
-                    onClick={() => openModal(event)}
+                    onClick={() => toggleRegister(event._id)}
                   >
-                    Register
+                    {isRegistered ? 'Registered' : 'Register'}
                   </button>
                 </div>
               );
